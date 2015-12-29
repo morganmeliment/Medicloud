@@ -1,0 +1,118 @@
+<!-- Toolbar -->
+<div class = "ui-toolbar">
+	<a href = "/" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
+	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
+	<div class = "ui-toolbar-adduser"><p>Export As</p></div>
+	<div class = "ui-toolbar-adduser-option">
+		<div class = "option1"><p>.csv</p></div>
+		<div class = "option2"><p>.pdf</p></div>
+	</div>
+	<!--	<div class = "ui-toolbar-adduser-option" id = "second-option"><p>pdf</p></div> -->
+</div>
+<div class = "ui-toolbar-shade" id = "light-blue">
+</div>
+<div class = "left-navbar">
+	<div class = "left-nav-btn" id = "in-tab">
+		<img src = "/assets/graph-icn.png" class = "left-nav-icn" id = "dash-left-icn">
+		<p class = "left-nav-label">Dash</p>
+	</div>
+	<a href = "/medications/index">
+		<div class = "left-nav-btn">
+			<img src = "/assets/meds-icn.png" class = "left-nav-icn" id = "med-left-icn">
+			<p class = "left-nav-label">Meds</p>
+		</div>
+	</a>
+	<div class = "left-nav-btn">
+		<img src = "/assets/notes-icn.png" class = "left-nav-icn" id = "note-left-icn">
+		<p class = "left-nav-label">Notes</p>
+	</div>
+</div>
+<div class = "app-container">
+	<div id = "dashboard-component-1">
+		<div class = "dashboard-component-1-1">
+			<span><div id = "counter">0.0</div>%</span>
+			<p>Adherence Rating</p>
+			<script>
+				$({countNum: $('#counter').text()}).animate({countNum: parseInt("<%= @adherence %>")}, {
+  					duration: 700,
+  					easing:'linear',
+  					step: function() {
+    					$('#counter').text(Math.round(this.countNum * 10) / 10);
+  					},
+  					complete: function() {
+    					$('#counter').text("<%= @adherence %>");
+  					}
+				});
+			</script>
+		</div>
+		<div id = "column-divider"></div>
+		<div class = "dashboard-component-1-2">
+			<% u = 0 %>
+			<% @adherencearray.each do |date, perc|%>
+			<% u += 1 %>
+				<div class = "dash-graph-bar" id = "<%= date %>"></div>
+				<script>
+				$("#<%= date %>").animate({height: "<%= 200 * perc + 1 %>px"}, 700);
+				function update() {
+					if ($(window).width() < 900) {
+						$("#<%= date %>").css("margin-left", "<%= 320 + (12 * date)%>px")
+					} else if ($(window).width() > 1550) {
+						$("#<%= date %>").css("margin-left", "<%= 320 + (35 * date)%>px")
+					} else {
+						$("#<%= date %>").css("margin-left", "calc(<%= 3.4 * date %>% - <%= 14 * date %>px + 320px)")
+					}
+				};
+				$(document).ready(update);    // When the page first loads
+				$(window).resize(update);
+				</script>
+			<% end %>
+		</div>
+	</div>
+	<% tocount = 0 %>
+	<% @adherencegraphs.each do |addgraph| %>
+	<% tocount += 1 %>
+	<div class = "half-graph-container" id = "<%= tocount %>y">
+		<div class = "half-graph-tool-bg">
+			<p class = "half-graph-label">Concerta, 36mg</p>
+			<div class = "half-graph-btn-option 1z">
+				<div class = "option1x"><p>Simple #</p></div>
+				<div class = "option2x"><p>Contrast</p></div>
+			</div>
+			<div class = "half-graph-btn 1q"><p>Simple %</p></div>
+			<script>
+				var ioz = false;
+				$("#<%= tocount %>y .1q").click(function() {
+					if (ioz === false) {
+						$("#<%= tocount %>y .1z").animate({height: "103px"}, 300);
+						ioz = true;
+					} else {
+						$("#<%= tocount %>y .1z").animate({height: "20px"}, 300);
+						ioz = false;
+					}
+				});
+			</script>
+			<% if tocount <= 2 %>
+				<script>
+					$("#<%= tocount %>y").css("margin-top", "290px")
+				</script>
+			<% end %>
+			<div class = "div-line"></div>
+		</div>
+	</div>
+	<% end %>
+
+<script>
+	$(".ui-toolbar-adduser-option").hide();
+	var io = false;
+	$(".ui-toolbar-adduser").click(function() {
+		if (io === false) {
+			$(".ui-toolbar-adduser-option").fadeToggle();
+			io = true;
+		} else {
+			$(".ui-toolbar-adduser-option").fadeToggle();
+			io = false;
+		}
+	});
+</script>
+
+

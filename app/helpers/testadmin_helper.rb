@@ -1,0 +1,2 @@
+module TestadminHelper
+end

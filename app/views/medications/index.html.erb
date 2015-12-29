@@ -1,0 +1,65 @@
+<!-- Toolbar -->
+<div class = "ui-toolbar">
+	<a href = "/" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
+	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
+	<div class = "ui-toolbar-adduser" id = "export-btn" style = "right: 121px;"><p>Export As</p></div>
+	<div class = "ui-toolbar-adduser-option" style = "right: 121px;">
+		<div class = "option1"><p>.csv</p></div>
+		<div class = "option2"><p>.pdf</p></div>
+	</div>
+	<div class = "ui-toolbar-adduser"><p>New Med</p></div>
+	<div class = "ui-toolbar-adduser" style = "right: 242px;"><p>Import Data</p></div>
+	<!--	<div class = "ui-toolbar-adduser-option" id = "second-option"><p>pdf</p></div> -->
+</div>
+<div class = "ui-toolbar-shade" id = "light-blue">
+</div>
+<div class = "left-navbar">
+	<a href = "/dashboard/index">
+		<div class = "left-nav-btn">
+			<img src = "/assets/graph-icn.png" class = "left-nav-icn" id = "dash-left-icn">
+			<p class = "left-nav-label">Dash</p>
+		</div>
+	</a>
+	<div class = "left-nav-btn" id = "in-tab">
+		<img src = "/assets/meds-icn.png" class = "left-nav-icn" id = "med-left-icn">
+		<p class = "left-nav-label">Meds</p>
+	</div>
+	<div class = "left-nav-btn">
+		<img src = "/assets/notes-icn.png" class = "left-nav-icn" id = "note-left-icn">
+		<p class = "left-nav-label">Notes</p>
+	</div>
+</div>
+<div class = "app-container">
+	<div id = "medication-list-header">
+			<p>Medications</p>
+			<img>
+	</div>
+	<div id = "medication-list-view">
+		<% @medications.each do |med| %>
+			<div class = "med-table-cell">
+				<p class = "med-cell-label"><%= med.name %></p>
+				<p class = "med-cell-text"><%= med.dose %></p>
+				<img src = "/assets/forward-icn.png">
+			</div>
+		<% end %>
+	</div>
+	<div id = "med-interaction-field">
+		<div id = "interaction-circle">
+			<p>0</p>
+		</div>
+		<p id = "interaction-label">Interactions Found</p>
+	</div>
+</div>
+<script>
+	$(".ui-toolbar-adduser-option").hide();
+	var io = false;
+	$("#export-btn").click(function() {
+		if (io === false) {
+			$(".ui-toolbar-adduser-option").fadeToggle();
+			io = true;
+		} else {
+			$(".ui-toolbar-adduser-option").fadeToggle();
+			io = false;
+		}
+	});
+</script>

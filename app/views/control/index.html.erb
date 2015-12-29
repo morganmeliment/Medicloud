@@ -1,0 +1,95 @@
+<!-- Add User Form -->
+<div class = "popup" id = "create-user-form">
+	<img>
+	<p>Add New User</p>
+	<%= form_tag createuser_path, :method => 'post' do %>
+		<%= text_field_tag :firstname %>
+		<%= text_field_tag :lastname %>
+		<%= text_field_tag :encryptedpassw %>
+		<select name = "role">
+			<option value = "patient">Patient</option>
+			<option value = "physician">Physician</option>
+			<option value = "admin">Admin</option>
+		</select>
+		<%= submit_tag "Create" %>
+	<% end %>
+</div>
+<div class = "shade-behind-popup">
+</div>
+
+<!-- Toolbar -->
+<div class = "ui-toolbar">
+	<a href = "/" class = "small-logo"><img src = "/assets/logo-small.png"></a>
+	<p class = "left-toolbar-text"><%= current_org.name.split.map(&:capitalize).join(' ')%></p>
+	<%= form_tag control_index_path, :method => 'get' do %>
+		<%= text_field_tag :search, params[:search], :placeholder => "Search", :id => "ui-searchbar", :autocomplete => :off %>
+		<%= submit_tag "Sub", :type => :image, :src => "/assets/search-icn.png", :id => "ui-searchbar-btn" %>
+	<% end %>
+	<div class = "ui-searchbar-bg">
+	</div>
+	<div class = "ui-toolbar-adduser"><p>Add User</p></div>
+</div>
+<div class = "ui-toolbar-shade">
+</div>
+
+<!-- App Body -->
+<div class = "app-container" id = "full-style-container">
+	<% if params[:search] %>
+		<% y = 0 %>
+		<% @users.each do |user| %>
+			<% y += 1 %>
+			<a href = "/control/setviewuser?viewuser=<%= encrypt(user.id) %>"><div class = "testingthefloat3" <% if y == 1 %>id = "firstmarginonnotesindex"<% end %>>
+				<p><%= user.fullname %></p>
+				<p><%= user.role %></p>
+				<img src = "/assets/forward-icn.png">
+			</div></a>
+		<% end %>
+	<% else %>
+		<% f = 0 %>
+		<% User.where(:organization => current_user.organization).pluck(:id).each do |userid| %>
+			<% f += 1 %>
+			<% @user = User.find(userid) %>
+			<a href = "/control/setviewuser?viewuser=<%= encrypt(@user.id) %>"><div class = "testingthefloat3" <% if f == 1 %>id = "firstmarginonnotesindex"<% end %>>
+				<p><%= @user.fullname %></p>
+				<p><%= @user.role %></p>
+				<img src = "/assets/forward-icn.png">
+			</div></a>
+	<% end end %>
+<img src = "/assets/backdrop-logo.png" class = "backdrop-logo">
+</div>
+
+
+<script>
+	$(".popup").hide();
+	$(".shade-behind-popup").hide();
+
+	$(".ui-toolbar-adduser").click(function() {
+		$(".shade-behind-popup").css("pointer-events", "auto");
+		$(".popup").fadeToggle();
+		$(".shade-behind-popup").fadeToggle();
+	});
+
+	$(".shade-behind-popup").click(function() {
+		$(".shade-behind-popup").css("pointer-events", "none");
+		$(".popup").fadeToggle();
+		$(".shade-behind-popup").fadeToggle();
+	});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

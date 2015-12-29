@@ -1,0 +1,375 @@
+* {
+	margin: 0;
+}
+#topnavonhome {
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 40;
+	background-color: white;
+}
+#topnavonhome div img {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 25px;
+	left: 106px;
+	cursor: pointer;
+}
+#topnavonhome div p {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 16px;
+	position: absolute;
+	top: 31px;
+	left: 150px;
+	cursor: pointer;
+}
+#promoblock1 {
+	width: 100%;
+	height: 520px;
+	background-color: #699dd6;
+	margin-top: 80px;
+}
+#homepageheader {
+	width: 250px;
+	font-family: 'Montserrat';
+	color: white;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 25px;
+	text-align: center;
+	top: 200px;
+	left: calc(26% - 125px);
+	position: absolute;
+	z-index: 2;
+}
+#blockoneimagepro {
+	height: 400px;
+	position: absolute;
+	right: calc(30% - 200px);
+	top: 145px;
+}
+#promoblock1 a img {
+	width: 175px;
+	position: absolute;
+	top: 325px;
+	left: calc(26% - 87px);
+	z-index: 2;
+}
+#promoblock1 a img:hover {
+	opacity: .7;
+}
+#promoblock1 a p {
+	width: 175px;
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 16px;
+	text-align: center;
+	top: 342px;
+	left: calc(50% - 385px);
+	position: absolute;
+}
+#signen {
+	position: absolute;
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 13px;
+	right: 258px;
+	top: 32px;
+	text-decoration: none;
+	pointer-events: none;
+}
+#signop {
+	position: absolute;
+	font-family: 'Montserrat';
+	color: #43cb83;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 13px;
+	right: 110px;
+	top: 32px;
+	text-decoration: none;
+	pointer-events: none;
+}
+#signop2 div {
+	position: absolute;
+	right: 110px;
+	top: 23px;
+	width: 110px;
+	border-radius: 19px;
+	height: 36px;
+	background-color: #50cb88;
+	display: inline-block;
+}
+#signop2 div:hover {
+	opacity: .7;
+}
+#signop2 div p {
+	font-family: 'Montserrat';
+	color: white;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 12px;
+	font-weight: lighter;
+	text-align: center;
+	width: 110px;
+	position: absolute;
+	left: 0;
+	top: 10px;
+	display: inline-block;
+}
+#bgnavnumone {
+	position: absolute;
+	height: 80px;
+	width: 90px;
+	right: 235px;
+	background-color: grey;
+	opacity: 0;
+	cursor: pointer;
+}
+#bgnavnumtwo {
+	position: absolute;
+	height: 80px;
+	width: 90px;
+	right: 95px;
+	background-color: grey;
+	opacity: 0;
+	cursor: pointer;
+}
+#promoblock2 {
+	height: 475px;
+	width: 100%;
+	background-color: white;
+}
+#promoblock3 {
+	height: 500px;
+	width: 100%;
+	background-color: #f5f6fa;
+}
+#promoblock4 {
+	height: 600px;
+	width: 100%;
+	background-color: white;
+}
+#promoblock5 {
+	height: 100px;
+	width: 100%;
+	margin-top: 50px;
+}
+#promoblock2 h1 {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 18px;
+	font-weight: lighter;
+	width: 100%;
+	margin-top: 75px;
+	text-align: center;
+}
+#promoblock3 h1 {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 18px;
+	font-weight: lighter;
+	width: 100%;
+	margin-top: 75px;
+	text-align: center;
+	position: absolute;
+}
+#promoblock4 h1 {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 18px;
+	font-weight: lighter;
+	width: 100%;
+	margin-top: 75px;
+	text-align: center;
+	position: absolute;
+}
+#promoblock5 a img {
+	width: 225px;
+	position: absolute;
+	left: calc(50% - 112px);
+}
+#promoblock2 h2 {
+	font-family: 'Montserrat';
+	color: #a3acb3;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 14px;
+	font-weight: lighter;
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 35px;
+	text-align: center;
+}
+#promoblock3 h2 {
+	font-family: 'Montserrat';
+	color: #a3acb3;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 14px;
+	font-weight: lighter;
+	width: 200px;
+	margin-left: calc(50% - 100px);
+	margin-top: 115px;
+	text-align: center;
+	position: absolute;
+}
+#firstptwo {
+	height: 100px;
+	margin-top: 70px;
+	left: calc(50% - 300px);
+	position: absolute;
+}
+#secptwo {
+	height: 100px;
+	margin-top: 70px;
+	position: absolute;
+	left: calc(50% - 50px);
+}
+#thirdptwo {
+	height: 100px;
+	margin-top: 70px;
+	position: absolute;
+	left: calc(50% + 200px);
+}
+#devicespromo {
+	position: absolute;
+	height: 200px;
+	margin-top: 200px;
+	left: calc(50% - 210px);
+}
+#firstptwo {
+	height: 100px;
+	margin-top: 70px;
+	left: calc(50% - 300px);
+	position: absolute;
+}
+#secptwo {
+	height: 100px;
+	margin-top: 70px;
+	position: absolute;
+	left: calc(50% - 50px);
+}
+#thirdptwo {
+	height: 100px;
+	margin-top: 70px;
+	position: absolute;
+	left: calc(50% + 200px);
+}
+#interactionspromo {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 15px;
+	font-weight: lighter;
+	margin-top: 195px;
+	left: calc(50% - 295px);
+	text-align: center;
+	position: absolute;
+}
+#calendarspromo {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 15px;
+	font-weight: lighter;
+	margin-top: 195px;
+	left: calc(50% - 35px);
+	text-align: center;
+	position: absolute;
+}
+#graphspromo {
+	font-family: 'Montserrat';
+	color: #525c62;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 15px;
+	font-weight: lighter;
+	margin-top: 195px;
+	left: calc(50% + 223px);
+	text-align: center;
+	position: absolute;
+}
+#interactionssubtext {
+	font-family: 'Montserrat';
+	color: #a3acb3;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 13px;
+	font-weight: lighter;
+	margin-top: 230px;
+	left: calc(50% - 325px);
+	text-align: center;
+	position: absolute;
+	width: 150px;
+}
+#calendarssubtext {
+	font-family: 'Montserrat';
+	color: #a3acb3;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 13px;
+	font-weight: lighter;
+	margin-top: 230px;
+	left: calc(50% - 75px);
+	text-align: center;
+	position: absolute;
+	width: 150px;
+}
+#graphssubtext {
+	font-family: 'Montserrat';
+	color: #a3acb3;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 13px;
+	font-weight: lighter;
+	margin-top: 230px;
+	left: calc(50% + 175px);
+	text-align: center;
+	position: absolute;
+	width: 150px;
+}
+#connectorone {
+	position: absolute;
+	margin-top: 118px;
+	height: 4px;
+	left: calc(50% + 95px);
+}
+#connectortwo {
+	position: absolute;
+	margin-top: 118px;
+	height: 4px;
+	left: calc(50% - 155px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
