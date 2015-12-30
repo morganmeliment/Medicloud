@@ -1,7 +1,7 @@
 <div id = "topnavonhome">
 <div>
 <img src = "/assets/logo-small.png" alt = "medicloud logo">
-<p>Medicloud<%= User.find(1).id %></p>
+<p>Medicloud<%= User.find(1).firstname %>, <%= current_user.firstname %></p>
 </div>
 <a href = "/users/sign_in"><div id = "bgnavnumone">
 </div></a>
