@@ -6,11 +6,15 @@ def index
 	else
 		redirect_to root_path
 	end
+
 	if params[:search]
       @users = User.search(params[:search])
     end
-    #@medication = Medication.new(:userid => 1, :name => "Concerta", :schedule => "daily", :dose => "5 mg", :datapoints => [[Date.new(2015,11,29), "true"]])
-   # @medication.save
+=begin		
+ 	end
+    @medication = Medication.new(:userid => 1, :name => "Concerta", :schedule => "daily", :dose => "5 mg", :datapoints => [[Date.new(2015,11,29), "true"]])
+    @medication.save
+=end
 end
 
 def setviewuser
