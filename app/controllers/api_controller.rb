@@ -160,8 +160,8 @@ def generatetimeline
 		end
 		@fullhtml = @fullhtml + dateblock + "</div>"
 	end
-
-	render :html => @fullhtml.html_safe
+	final = @fullhtml + '<br><br>'
+	render :html => final.html_safe
 end
 
 #class end
