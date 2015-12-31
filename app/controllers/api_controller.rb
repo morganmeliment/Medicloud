@@ -156,9 +156,6 @@ def generatetimeline
 			dateblock = dateblock + "
 			<div class = 'medtakeblock'>
             	<p class = 'medname'>There aren't any medications on this day</p>
-            	<div>
-                	<p>Take</p>
-            	</div>
         	</div>"
 		end
 		@fullhtml = @fullhtml + dateblock + "</div>"
