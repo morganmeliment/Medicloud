@@ -127,10 +127,19 @@ def generatetimeline
 
 	#turn data into html
 	@fullhtml = ""
+	i = 0
 	for day in @timeline
+		i += 1
+		if i % 3 == 0
+			dotcolor = "dot blue"
+		elsif i % 3 == 1
+			dotcolor = "dot red"
+		else
+			dotcolor = "dot green"
+		end
 		dateblock = "
 		<div class = 'dateblock'>
-        <div class = 'dot red'></div>
+        <div class = '" + dotcolor + "'></div>
         <p id = 'datetitle'>#{day[0]}</p>
 		"
 		for k in day[1]
@@ -142,6 +151,15 @@ def generatetimeline
             	</div>
         	</div>
 			"
+		end
+		if day[1] == []
+			dateblock = dateblock + "
+			<div class = 'medtakeblock'>
+            	<p class = 'medname'>There aren't any medications on this day</p>
+            	<div>
+                	<p>Take</p>
+            	</div>
+        	</div>"
 		end
 		@fullhtml = @fullhtml + dateblock + "</div>"
 	end
