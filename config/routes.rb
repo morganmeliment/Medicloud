@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post '/createuser', to: 'control#createuser'
 
   get '/timelineapi', to: 'api#generatetimeline'
+  get '/medapi', to: 'api#generatemeds'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

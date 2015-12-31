@@ -164,6 +164,20 @@ def generatetimeline
 	render :html => final.html_safe
 end
 
+def generatemeds
+	userident = 1
+	finalhtml = ""
+	Medication.where(:userid => userident).each do |medication|
+		finalhtml = finalhtml + "<div class = 'medicationbox mbox'>
+            <p id = 'medtitlename'><span class = 'medactname'>#{medication.name}</span>, #{medication.dose}</p>
+            <p id = 'medlasttaken'>Last Taken: YY:YYam</p>
+            <p id = 'pillsreminderlabel'>x pills left</p>
+            <img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
+        </div>"
+	end
+	render :html => finalhtml.html_safe
+end
+
 #class end
 end
 
