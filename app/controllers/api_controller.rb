@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
 	skip_before_action :verify_authenticity_token
-
+require "open-uri"
 def generateSchedule(usid, days)
   	@daystoconsider = days
 
@@ -176,6 +176,89 @@ def generatemeds
         </div>"
 	end
 	render :html => finalhtml.html_safe
+end
+
+def createthedb
+	if params[:term].length >= 3
+    	arry = MedDb.search(params[:term])
+ 		meds = []
+ 		for g in arry
+ 			meds.append g.name
+ 		end
+    	if meds.length > 2
+    		meds.reject! {|x| x.length > 30}
+    		sorted = meds.sort_by(&:length).first(5)
+    		render :json => sorted
+    	else
+    		render :json => meds
+    	end
+	else
+		render :json => []
+	end
+=begin
+	string = "concert"
+	letterscorrect = 0
+	index = 0
+	stop = false
+	@dblength = [0, 24094]
+	letters = []
+	rendered = false
+	i = 0
+	while stop == false && i < 20
+		i += 1
+		middle = (@dblength[1] + @dblength[0]) / 2
+		split = MedDb.find(middle).name.downcase
+		if split.length > letterscorrect && string.length > letterscorrect
+		if split[letterscorrect].ord > string[letterscorrect].ord && split[0, letterscorrect] == string[0, letterscorrect]
+			@dblength = [@dblength[0], middle]
+		elsif split[letterscorrect].ord < string[letterscorrect].ord && split[0, letterscorrect] == string[0, letterscorrect]
+			@dblength = [middle, @dblength[1]]
+		elsif split[letterscorrect].ord < string[letterscorrect].ord && split[letterscorrect - 1].ord < string[letterscorrect - 1].ord
+			@dblength = [middle, @dblength[1]]
+		elsif split[letterscorrect].ord < string[letterscorrect].ord && split[letterscorrect - 1].ord > string[letterscorrect - 1].ord
+			@dblength = [@dblength[0], middle]
+		elsif split[letterscorrect].ord > string[letterscorrect].ord && split[letterscorrect - 1].ord < string[letterscorrect - 1].ord
+			@dblength = [middle, @dblength[1]]
+		elsif split[letterscorrect].ord > string[letterscorrect].ord && split[letterscorrect - 1].ord > string[letterscorrect - 1].ord
+			@dblength = [@dblength[0], middle]
+		elsif split[letterscorrect].ord == string[letterscorrect].ord && split[0, letterscorrect] == string[0, letterscorrect]
+			if letterscorrect < (string.length - 1)
+				letterscorrect += 1
+			else
+				stop = true
+			end
+			letters.append split[letterscorrect - 1]
+			if split[letterscorrect].ord > string[letterscorrect].ord
+				@dblength = [@dblength[0], middle]
+			elsif split[letterscorrect].ord < string[letterscorrect].ord
+				@dblength = [middle, @dblength[1]]
+			end
+			if split == string
+				stop = true
+				render :text => "Medication found in #{i} moves."
+				rendered = true
+			else
+				if (@dblength[1] - @dblength[0]) < 10
+					for x in (@dblength[0] - 5 .. @dblength[1] + 5)
+						if MedDb.find(x).name == string
+							stop = true
+							render :text => "Medication found in #{i} moves."
+							rendered = true
+						end
+					end
+				end
+			end
+		end
+		end
+	end
+	if rendered == false && MedDb.where(:name => string).empty?
+		render :text => "Medication not found."
+	else
+		if rendered == false
+			render :text => "Medication found in failed moves. #{@dblength} #{letters} #{letterscorrect}"
+		end
+	end
+=end
 end
 
 #class end

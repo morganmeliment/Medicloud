@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/timelineapi', to: 'api#generatetimeline'
   get '/medapi', to: 'api#generatemeds'
 
+  get '/dblist', to: 'api#createthedb'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
