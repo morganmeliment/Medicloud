@@ -164,6 +164,7 @@ def generatetimeline
 	render :html => final.html_safe
 end
 
+
 def generatemeds
 	userident = 1
 	finalhtml = ""
@@ -177,6 +178,7 @@ def generatemeds
 	end
 	render :html => finalhtml.html_safe
 end
+
 
 def createthedb
 	if params[:term].length >= 3
@@ -259,6 +261,11 @@ def createthedb
 		end
 	end
 =end
+end
+
+def createmedication
+	@med = Medication.new(:userid => 1, :name => "Concerta", :schedule => "daily", :dose => "36mg")
+	@med.save
 end
 
 #class end
