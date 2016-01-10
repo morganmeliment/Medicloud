@@ -270,14 +270,13 @@ end
 
 def registerdevice
 	@user = User.find(params[:id])
-	if @user.deviceids.include? params[:devid] == false
+	if @user.deviceids.include? params[:devid]
+		render :text => @user.deviceids
+	else
 		@user.deviceids.push params[:devid]
 		@user.save!
 		render :text => "sweet"
-	else
-		render :text => @user.deviceids
 	end
-	
 end
 
 def sendnotification
