@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109205759) do
+ActiveRecord::Schema.define(version: 20160101203243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,23 +30,20 @@ ActiveRecord::Schema.define(version: 20160109205759) do
     t.string "name"
   end
 
-  create_table "meddb", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "medications", force: :cascade do |t|
     t.string   "userid"
     t.string   "name"
     t.string   "schedule"
     t.string   "dose"
-    t.string   "datapoints", default: [],              array: true
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "datapoints",        default: [],              array: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "notification_time"
+    t.string   "interaction_id"
+    t.integer  "pill_container"
+    t.integer  "pills_left"
+    t.string   "last_taken"
+    t.string   "auth_token"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -65,14 +62,9 @@ ActiveRecord::Schema.define(version: 20160109205759) do
     t.string   "organization"
     t.string   "role"
     t.string   "fullname"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "notification_time"
-    t.string   "interaction_id"
-    t.integer  "pill_container"
-    t.integer  "pills_left"
-    t.string   "last_taken"
-    t.string   "auth_token"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "deviceids",      default: [],              array: true
   end
 
 end

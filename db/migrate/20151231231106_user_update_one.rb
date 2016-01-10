@@ -6,6 +6,6 @@ class UserUpdateOne < ActiveRecord::Migration
   	add_column :medications, :pills_left, :integer
   	add_column :medications, :last_taken, :string
   	add_column :medications, :auth_token, :string
-  	add_column :medications, :deviceids, :string, array: true, default: []
+  	add_column :users, :deviceids, :string, array: true, default: []
   end
 end

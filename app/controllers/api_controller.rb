@@ -269,10 +269,10 @@ def createmedication
 end
 
 def registerdevice
-	@user = User.find(params[:id])
-	@user.deviceids.append params[:devid]
+	#@user = User.find(params[:id])
+	#@user.deviceids.append params[:devid]
 	APNS.send_notification(params[:devid], :alert => "'You have 2 medications to take.'", :message => "hello")
-	render :status => 200
+	render :text => "All Good"
 end
 
 #class end
