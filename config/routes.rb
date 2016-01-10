@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get '/dblist', to: 'api#createthedb'
   get '/createmedication', to: 'api#createmedication'
+
+  get '/registerdevice', to: 'api#registerdevice'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

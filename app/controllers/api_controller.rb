@@ -268,6 +268,12 @@ def createmedication
 	@med.save
 end
 
+def registerdevice
+	@user = User.find(params[:id])
+	@user.deviceids.append params[:devid]
+	render :status => 200
+end
+
 #class end
 end
 
