@@ -270,16 +270,19 @@ end
 
 def registerdevice
 	@user = User.find(params[:id])
-	@user.deviceids.push params[:devid]
-	@user.save!
-	APNS.send_notification(params[:devid], :alert => "'You have 2 medications to take.'", :message => "hello")
-	render :text => "All Good"
+	if params[:devid].include? @user.deviceids == false
+		@user.deviceids.push params[:devid]
+		@user.save!
+	end
+	render :status => 200
 end
 
 def sendnotification
-	@u = User.find(1).deviceids[0]
-	APNS.send_notification(@u, :alert => "'You have 2 medications to take.'", :message => "hello")
-	render :text => @u
+	@u = User.find(1).deviceids
+	for e in @u
+		APNS.send_notification(e, :alert => "You have 2 medications to take.", :message => "hello")
+	end
+	render :status => 200
 end
 
 #class end
