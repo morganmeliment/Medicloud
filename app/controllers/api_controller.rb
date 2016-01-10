@@ -276,6 +276,12 @@ def registerdevice
 	render :text => "All Good"
 end
 
+def sendnotification
+	@u = User.find(1).deviceids[0]
+	APNS.send_notification(@u, :alert => "'You have 2 medications to take.'", :message => "hello")
+	render :text => @u
+end
+
 #class end
 end
 
