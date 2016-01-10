@@ -270,7 +270,8 @@ end
 
 def registerdevice
 	@user = User.find(params[:id])
-	@user.deviceids.append params[:devid]
+	@user.deviceids.push params[:devid]
+	@user.save!
 	APNS.send_notification(params[:devid], :alert => "'You have 2 medications to take.'", :message => "hello")
 	render :text => "All Good"
 end
