@@ -264,7 +264,11 @@ def createthedb
 end
 
 def createmedication
-	@med = Medication.new(:userid => 1, :name => "Concerta", :schedule => "daily", :dose => "36mg")
+	if params[:toggle] == "on"
+		@med = Medication.new(:userid => 1, :name => params[:medname], :schedule => "#{params[:times]} times/#{params[:timeunit]}", :dose => "#{params[:dosenum]}#{params[:doseun]}", :notification_time => "#{params[:taketime]}")
+	else
+		@med = Medication.new(:userid => 1, :name => params[:medname], :schedule => "daily", :dose => "#{params[:dosenum]}#{params[:doseun]}")
+	end
 	@med.save
 end
 
