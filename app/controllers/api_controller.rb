@@ -273,8 +273,11 @@ def registerdevice
 	if @user.deviceids.include? params[:devid] == false
 		@user.deviceids.push params[:devid]
 		@user.save!
+		render :text => "sweet"
+	else
+		render :text => @user.deviceids
 	end
-	render :text => " "
+	
 end
 
 def sendnotification
