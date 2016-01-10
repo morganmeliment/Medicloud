@@ -270,6 +270,7 @@ def createmedication
 		@med = Medication.new(:userid => 1, :name => params[:medname], :schedule => "daily", :dose => "#{params[:dosenum]}#{params[:doseun]}")
 	end
 	@med.save
+	render :text => "success"
 end
 
 def registerdevice
