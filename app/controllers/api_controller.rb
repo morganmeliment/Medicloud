@@ -270,11 +270,11 @@ end
 
 def registerdevice
 	@user = User.find(params[:id])
-	if params[:devid].include? @user.deviceids == false
+	if @user.deviceids.include? params[:devid] == false
 		@user.deviceids.push params[:devid]
 		@user.save!
 	end
-	render :status => 200
+	render :text => " "
 end
 
 def sendnotification
@@ -282,7 +282,7 @@ def sendnotification
 	for e in @u
 		APNS.send_notification(e, :alert => "You have 2 medications to take.", :message => "hello")
 	end
-	render :status => 200
+	render :text => " "
 end
 
 #class end
