@@ -179,6 +179,25 @@ def generatemeds
 	render :html => finalhtml.html_safe
 end
 
+def generatenotes
+	userident = 1
+	finalhtml = ""
+	d = 0
+	Note.where(:userid => userident).each do |note|
+		d += 1
+		finalhtml = finalhtml + "<div class = 'medicationbox notebox'>
+			<p id = 'medtitlename'><span class = 'medactname'>#{note.name}</span></p>
+			<p id = 'medlasttaken'>Created: #{note.created_at.to_time}</p>
+			<p id = 'pillsreminderlabel'>#{note.notecontent[0...18]}...</p>
+			<img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
+		</div>"
+	end
+	(20 - (d * 0.66).ceil).times do
+		finalhtml = finalhtml + "<div class = 'horizontalline'></div>"
+	end
+	render :html => finalhtml.html_safe
+end
+
 
 def createthedb
 	if params[:term].length >= 3

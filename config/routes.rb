@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get '/registerdevice', to: 'api#registerdevice'
   get '/noti', to: 'api#sendnotification'
   get '/apinoteinfo', to: 'api#getnoteinfo'
+  get '/generatenotes', to: 'api#generatenotes'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
