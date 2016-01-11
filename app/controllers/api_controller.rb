@@ -179,9 +179,12 @@ def takemedicationapi
 	daysag = expectedparam.split(",")[0].to_i
 	medid = expectedparam.split(",")[1].to_i
 	med = Medication.find(medid)
-	med.datapoints.push ["#{Date.today + daysag.to_i}", "true"]
-	med.save!
-	render :text => ""
+	if med.datapoints.include? ["#{Date.today + daysag.to_i}", "true"]
+	else
+		med.datapoints.push ["#{Date.today + daysag.to_i}", "true"]
+		med.save!
+		render :text => ""
+	end
 end
 
 def generatemeds
