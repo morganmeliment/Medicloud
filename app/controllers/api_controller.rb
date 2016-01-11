@@ -292,6 +292,13 @@ def createmedication
 	render :text => "success"
 end
 
+def deletemedapi
+	if params[:med].present?
+		Medication.destroy(params[:med])
+		render :text => ""
+	end
+end
+
 def getnoteinfo
 	@note = Note.find(params[:id])
 	render :json => [@note.name, @note.notecontent]
