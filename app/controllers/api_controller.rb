@@ -170,6 +170,7 @@ def generatemeds
 	finalhtml = ""
 	Medication.where(:userid => userident).each do |medication|
 		finalhtml = finalhtml + "<div class = 'medicationbox mbox'>
+			<span class = 'idtag'>"+"#{medication.id}"+"</span>
             <p id = 'medtitlename'><span class = 'medactname'>#{medication.name}</span>, #{medication.dose}</p>
             <p id = 'medlasttaken'>Last Taken: YY:YYam</p>
             <p id = 'pillsreminderlabel'>x pills left</p>
