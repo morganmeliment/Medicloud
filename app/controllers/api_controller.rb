@@ -174,7 +174,7 @@ def generatemeds
             <p id = 'medtitlename'><span class = 'medactname'>#{medication.name}</span>, #{medication.dose}</p>
             <p id = 'medlasttaken'>Last Taken: YY:YYam</p>
             <p id = 'pillsreminderlabel'>x pills left</p>
-            <img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
+            <img src = 'img/fwd_arrow.png' id = 'forwardmedarrow' style = 'margin-top: 18px;'>
         </div>"
 	end
 	render :html => finalhtml.html_safe
