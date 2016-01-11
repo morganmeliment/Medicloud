@@ -17,10 +17,10 @@ def generateSchedule(usid, days)
 	Medication.where(:userid => usid).each do |medication|
 		frequency = medication.schedule
 		timestamp = medication.created_at
-		int = 0
+		int = @daystoconsider + 1
 		@daystoconsider.times do
-			int += 1
-			datadate = Date.today - int.days
+			int -= 1
+			datadate = Date.today + (int - 2).days
 			createadate = Date.strptime("#{timestamp.month}/#{timestamp.day}/#{timestamp.year}", '%m/%d/%Y')
 			dayssinceadd = datadate - createadate
 			if dayssinceadd % 7 == 0
