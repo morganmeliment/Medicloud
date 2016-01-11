@@ -118,7 +118,7 @@ def generatetimeline
 					hasTaken = true
 				end
 			end
-			todayMeds.append ["#{thisMed.name}, #{thisMed.dose}", hasTaken]
+			todayMeds.append ["#{thisMed.name}, #{thisMed.dose}", hasTaken, thisMed.id]
 		end
 
 		@timeline[toDay] = todayMeds
@@ -148,6 +148,7 @@ def generatetimeline
 				<div class = 'medtakeblock'>
             		<p class = 'medname'>#{k[0]}#{k[1]}</p>
             		<div>
+            			<span class = 'takeinfo' style = 'display: none;'>#{i - 2}, #{k[2]}</span>
                 		<p>Take</p>
             		</div>
         		</div>
