@@ -143,14 +143,22 @@ def generatetimeline
         <p id = 'datetitle'>#{day[0]}</p>
 		"
 		for k in day[1]
+			if i < 3
 			dateblock = dateblock + "
-			<div class = 'medtakeblock'>
-            	<p class = 'medname'>#{k[0]}</p>
-            	<div>
-                	<p>Take</p>
-            	</div>
-        	</div>
-			"
+				<div class = 'medtakeblock'>
+            		<p class = 'medname'>#{k[0]}#{k[1]}</p>
+            		<div>
+                		<p>Take</p>
+            		</div>
+        		</div>
+				"
+			else
+				dateblock = dateblock + "
+				<div class = 'medtakeblock'>
+            		<p class = 'medname'>#{k[0]}#{k[1]}</p>
+        		</div>
+				"
+			end
 		end
 		if day[1] == []
 			dateblock = dateblock + "
@@ -164,6 +172,16 @@ def generatetimeline
 	render :html => final.html_safe
 end
 
+def takemedicationapi
+	#"0,7"
+	expectedparam = params[:i]
+	daysag = expectedparam.split(",")[0].to_i
+	medid = expectedparam.split(",")[1].to_i
+	med = Medication.find(medid)
+	med.datapoints.push ["#{Date.today + daysag.to_i}", "true"]
+	med.save!
+	render :text => ""
+end
 
 def generatemeds
 	userident = 1
