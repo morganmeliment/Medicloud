@@ -187,8 +187,8 @@ def generatenotes
 		d += 1
 		finalhtml = finalhtml + "<div class = 'medicationbox notebox'>
 			<p id = 'medtitlename'><span class = 'medactname'>#{note.name}</span></p>
-			<p id = 'medlasttaken'>Created: #{note.created_at.to_time}</p>
-			<p id = 'pillsreminderlabel'>#{note.notecontent[0...18]}...</p>
+			<p id = 'medlasttaken'>Created: #{note.created_at.to_time.strftime('%x')}</p>
+			<p id = 'pillsreminderlabel'>#{note.notecontent[0...15]}...</p>
 			<img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
 		</div>"
 	end
