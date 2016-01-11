@@ -180,24 +180,13 @@ def takemedicationapi
 	medid = expectedparam.split(",")[1].to_i
 	med = Medication.find(medid)
 	if med.datapoints.include? ["#{Date.today + daysag.to_i}", "true"]
-	else
-		med.datapoints.push ["#{Date.today + daysag.to_i}", "true"]
-		med.save!
-		render :text => ""
-	end
-end
-
-def untakemedicationapi
-	#"0,7"
-	expectedparam = params[:i]
-	daysag = expectedparam.split(",")[0].to_i
-	medid = expectedparam.split(",")[1].to_i
-	med = Medication.find(medid)
-	if med.datapoints.include? ["#{Date.today + daysag.to_i}", "true"]
 		med.datapoints.delete(["#{Date.today + daysag.to_i}", "true"])
 		med.save!
 		render :text => ""
 	else
+		med.datapoints.push ["#{Date.today + daysag.to_i}", "true"]
+		med.save!
+		render :text => ""
 	end
 end
 
