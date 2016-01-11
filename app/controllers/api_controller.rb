@@ -273,6 +273,11 @@ def createmedication
 	render :text => "success"
 end
 
+def getnoteinfo
+	@note = Note.find(params[:id])
+	render :json => [@note.name, @note.notecontent]
+end
+
 def registerdevice
 	@user = User.find(params[:id])
 	if @user.deviceids.include? params[:devid]
