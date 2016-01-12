@@ -147,19 +147,24 @@ def generatetimeline
 		"
 		for k in day[1]
 			if i < 3
+				if k[1] == true
+            		snippet = "<div class = 'green'>
+            				<span class = 'takeinfo' style = 'display: none;'>#{i - 2}, #{k[2]}</span>
+                			<p class = 'whitetext'>Taken</p>
+            			</div>"
+            	else
+            		snippet = "<div>
+            				<span class = 'takeinfo' style = 'display: none;'>#{i - 2}, #{k[2]}</span>
+                			<p>Take</p>
+            			</div>"
+            	end
 				dateblock = dateblock + "
 				<div class = 'medtakeblock'>
-            		<p class = 'medname'>#{k[0]}#{k[1]}</p>
-            		<div>
-            			<span class = 'takeinfo' style = 'display: none;'>#{i - 2}, #{k[2]}</span>
-                		<p>Take</p>
-            		</div>
-        		</div>
-				"
+            		<p class = 'medname'>#{k[0]}</p>"+snippet+"</div>"
 			else
 				dateblock = dateblock + "
 				<div class = 'medtakeblock'>
-            		<p class = 'medname'>#{k[0]}#{k[1]}</p>
+            		<p class = 'medname'>#{k[0]}</p>
         		</div>
 				"
 			end
