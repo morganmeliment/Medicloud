@@ -321,6 +321,12 @@ def createmedication
 	render :text => "success"
 end
 
+def createnote
+	@note = Note.new(:userid => 1, :name => params[:notename], :notecontent => params[:notecontent])
+	@note.save
+	render :text => "success"
+end
+
 def deletemedapi
 	if params[:med].present?
 		Medication.destroy(params[:med])

@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   get '/medapi', to: 'api#generatemeds'
 
   get '/dblist', to: 'api#createthedb'
+
   post '/createmedication', to: 'api#createmedication'
+  post '/createnote', to: 'api#createnote'
 
   get '/registerdevice', to: 'api#registerdevice'
   get '/noti', to: 'api#sendnotification'
