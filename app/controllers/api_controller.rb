@@ -85,6 +85,10 @@ def generateSchedule(usid, days)
 	return @medsfordays
 end
 
+def getusername
+	render :text => User.find(params[:io]).firstname
+end
+
 def generatetimeline
 	#use a parameter to get user id in the future
 	@userident = 1
