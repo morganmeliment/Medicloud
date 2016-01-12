@@ -16,7 +16,7 @@ def generateSchedule(usid, days)
 	# This calculates @medsfordays
 	Medication.where(:userid => usid).each do |medication|
 		frequency = medication.schedule
-		timestamp = medication.created_at
+		timestamp = medication.created_at.localtime
 		int = @daystoconsider + 1
 		@daystoconsider.times do
 			int -= 1
