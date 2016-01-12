@@ -328,6 +328,10 @@ def createnote
 	render :text => "success"
 end
 
+def getnotei
+	render :text => Note.find(params[:d]).notecontent
+end
+
 def deletemedapi
 	if params[:med].present?
 		Medication.destroy(params[:med])

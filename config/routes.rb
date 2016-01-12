@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get '/takemedicationapi', to: 'api#takemedicationapi'
   get '/getusername', to: 'api#getusername'
+  get '/getnotei', to: 'api#getnotei'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
