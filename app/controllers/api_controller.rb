@@ -148,7 +148,7 @@ def generatetimeline
 		for k in day[1]
 			if i < 3
 				if k[1] == true
-            		snippet = "<div class = 'green'>
+            		snippet = "<div class = 'greenbutton'>
             				<span class = 'takeinfo' style = 'display: none;'>#{i - 2}, #{k[2]}</span>
                 			<p class = 'whitetext'>Taken</p>
             			</div>"
