@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
 	# This calculates @medsfordays
 	Medication.where(:userid => viewuser.id).each do |medication|
 		frequency = medication.schedule
-		timestamp = medication.created_at
+		timestamp = medication.created_at.localtime
 		int = -1
 		@daystoconsider.times do
 			int += 1
