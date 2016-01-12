@@ -120,8 +120,7 @@ def generatetimeline
 			end
 			todayMeds.append ["#{thisMed.name}, #{thisMed.dose}", hasTaken, thisMed.id]
 		end
-
-		@timeline[toDay] = todayMeds
+		@timeline[toDay] = todayMeds.sort {|a, b| a[3] <=> b[3]}
 	end
 
 
