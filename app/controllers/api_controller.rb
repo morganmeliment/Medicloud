@@ -215,6 +215,7 @@ def generatenotes
 	Note.where(:userid => userident).each do |note|
 		d += 1
 		finalhtml = finalhtml + "<div class = 'medicationbox notebox'>
+			<span class = 'noteidtag' style = 'display: none;'>"+"#{note.id}"+"</span>
 			<p id = 'medtitlename'><span class = 'medactname'>#{note.name}</span></p>
 			<p id = 'medlasttaken'>Created: #{note.created_at.to_time.strftime('%x')}</p>
 			<p id = 'pillsreminderlabel'>#{note.notecontent[0...15]}...</p>
@@ -330,6 +331,13 @@ end
 def deletemedapi
 	if params[:med].present?
 		Medication.destroy(params[:med])
+		render :text => ""
+	end
+end
+
+def deletenoteapi
+	if params[:note].present?
+		Note.destroy(params[:note])
 		render :text => ""
 	end
 end

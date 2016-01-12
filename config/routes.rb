@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/apinoteinfo', to: 'api#getnoteinfo'
   get '/generatenotes', to: 'api#generatenotes'
   get '/deletemedapi', to: 'api#deletemedapi'
+  get '/deletenoteapi', to: 'api#deletenoteapi'
 
   get '/takemedicationapi', to: 'api#takemedicationapi'
   get '/getusername', to: 'api#getusername'
