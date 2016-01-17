@@ -173,6 +173,8 @@
 	border-radius: 5px;
 	background-color: white;
 	z-index: 15;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .shade-behind-popup {
 	position: absolute;

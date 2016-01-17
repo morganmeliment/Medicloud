@@ -128,7 +128,9 @@ p {
 	margin-left: 28px;
 	margin-bottom: 20px;
 	border: 1px solid #e3e7ea;
-	overflow: scroll;
+	overflow: hidden;
+	border-radius: 5px;
+	position: relative;
 	float: left;
 }
 .half-graph-label {
@@ -170,7 +172,7 @@ p {
 }
 .half-graph-tool-bg {
 	position: absolute;
-	width: calc(50% - 45px);
+	width: 100%;
 	height: 50px;
 	background-color: white;
 }
@@ -254,6 +256,40 @@ p {
 .option2x:hover {
 	background-color: #f5f6fa;
 }
+.sub-percent-block {
+	background-color: #50bae2;
+	flex: 1;
+}
+#flexbox {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

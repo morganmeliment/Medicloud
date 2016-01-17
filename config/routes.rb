@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notes/index'
+
   get 'medications/index'
   get 'medications/new'
 
@@ -36,6 +38,8 @@ Rails.application.routes.draw do
   get '/takemedicationapi', to: 'api#takemedicationapi'
   get '/getusername', to: 'api#getusername'
   get '/getnotei', to: 'api#getnotei'
+
+  get '/completemedsearch', to: 'medications#completemedsearch'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

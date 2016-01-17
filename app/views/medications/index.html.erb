@@ -1,13 +1,45 @@
+<div class = "popup" id = "create-user-form">
+	<div class = "form-nav-header">
+		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn">
+		<p class = "form-nav-title">Add Medication For <%= viewuser.firstname.capitalize %></p>
+	</div>
+	<form>
+		<p class = "large-textinput-label">Medication Name:</p>
+		<input class = "large-textinput center" id = "autocomplete" type = "text">
+
+		<p class = "dual-selector-label">Dose:</p>
+		<div class = "dual-selector">
+			<div class = "dual-selector-onehalf">
+				<input class = "dual-selector-numinput" type = "number" value = "0">
+			</div>
+			<div class = "dual-selector-twohalf">
+				<select class = "dual-selector-select">
+					<option value = "mg">mg</option>
+					<option value = "mg">g</option>
+					<option value = "mg">ml</option>
+					<option value = "mg">L</option>
+				</select>
+			</div>
+		</div>
+
+		<div class = "submit-med-form">
+			<p>Create</p>
+		</div>
+	</form>
+</div>
+<div class = "shade-behind-popup">
+</div>
+
 <!-- Toolbar -->
 <div class = "ui-toolbar">
-	<a href = "/" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
+	<a href = "/control/index" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
 	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
 	<div class = "ui-toolbar-adduser" id = "export-btn" style = "right: 121px;"><p>Export As</p></div>
 	<div class = "ui-toolbar-adduser-option" style = "right: 121px;">
 		<div class = "option1"><p>.csv</p></div>
 		<div class = "option2"><p>.pdf</p></div>
 	</div>
-	<div class = "ui-toolbar-adduser"><p>New Med</p></div>
+	<div class = "ui-toolbar-adduser" id = "add-med-selector"><p>New Med</p></div>
 	<div class = "ui-toolbar-adduser" style = "right: 242px;"><p>Import Data</p></div>
 	<!--	<div class = "ui-toolbar-adduser-option" id = "second-option"><p>pdf</p></div> -->
 </div>
@@ -24,32 +56,44 @@
 		<img src = "/assets/meds-icn.png" class = "left-nav-icn" id = "med-left-icn">
 		<p class = "left-nav-label">Meds</p>
 	</div>
-	<div class = "left-nav-btn">
-		<img src = "/assets/notes-icn.png" class = "left-nav-icn" id = "note-left-icn">
-		<p class = "left-nav-label">Notes</p>
-	</div>
+	<a href = "/notes/index">
+		<div class = "left-nav-btn">
+			<img src = "/assets/notes-icn.png" class = "left-nav-icn" id = "note-left-icn">
+			<p class = "left-nav-label">Notes</p>
+		</div>
+	</a>
 </div>
 <div class = "app-container">
-	<div id = "medication-list-header">
+	<div id = "medications-applet">
+		<div id = "medication-list-header">
+			<img src = "/assets/dark-blue-heart-icn.png" class = "med-list-heart-icn">
 			<p>Medications</p>
-			<img>
-	</div>
-	<div id = "medication-list-view">
-		<% @medications.each do |med| %>
-			<div class = "med-table-cell">
-				<p class = "med-cell-label"><%= med.name %></p>
-				<p class = "med-cell-text"><%= med.dose %></p>
-				<img src = "/assets/forward-icn.png">
-			</div>
-		<% end %>
-	</div>
-	<div id = "med-interaction-field">
-		<div id = "interaction-circle">
-			<p>0</p>
+			<img src = "/assets/ui-delete-icn.png" class = "ui-delete-icn">
 		</div>
-		<p id = "interaction-label">Interactions Found</p>
+		<div id = "medication-list-view">
+			<% @medications.each do |med| %>
+				<div class = "med-table-cell">
+					<p class = "med-cell-label"><%= med.name %>, <%= med.dose %></p>
+					<img src = "/assets/red-delete-icn.png" class = "med-delete-icn">
+					<img src = "/assets/forward-icn.png" class = "viewmed-btn">
+				</div>
+			<% end %>
+		</div>
+		<div id = "med-interaction-field">
+			<div id = "interaction-circle">
+				<p>0</p>
+			</div>
+			<p id = "interaction-label">Interactions Found</p>
+		</div>
 	</div>
 </div>
+<script>
+$(function() {
+ $("#autocomplete").autocomplete({
+    source: "/completemedsearch.json"
+ });
+});
+</script>
 <script>
 	$(".ui-toolbar-adduser-option").hide();
 	var io = false;
@@ -62,4 +106,41 @@
 			io = false;
 		}
 	});
+
+	$(".popup").hide();
+	$(".shade-behind-popup").hide();
+	$(".med-delete-icn").hide();
+
+	$("#add-med-selector").click(function() {
+		$(".shade-behind-popup").css("pointer-events", "auto");
+		$(".popup").fadeToggle();
+		$(".shade-behind-popup").fadeToggle();
+	});
+
+	$(".ui-delete-icn").click(function() {
+		$(".med-delete-icn").fadeToggle(200);
+	});
+
+	$(".shade-behind-popup").click(function() {
+		$(".shade-behind-popup").css("pointer-events", "none");
+		$(".popup").fadeToggle();
+		$(".shade-behind-popup").fadeToggle();
+	});
+
+	$(".form-nav-back-btn").click(function() {
+		$(".shade-behind-popup").css("pointer-events", "none");
+		$(".popup").fadeToggle();
+		$(".shade-behind-popup").fadeToggle();
+	});
 </script>
+
+
+
+
+
+
+
+
+
+
+

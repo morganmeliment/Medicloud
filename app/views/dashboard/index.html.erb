@@ -1,6 +1,6 @@
 <!-- Toolbar -->
 <div class = "ui-toolbar">
-	<a href = "/" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
+	<a href = "/control/index" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
 	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
 	<div class = "ui-toolbar-adduser"><p>Export As</p></div>
 	<div class = "ui-toolbar-adduser-option">
@@ -22,10 +22,12 @@
 			<p class = "left-nav-label">Meds</p>
 		</div>
 	</a>
-	<div class = "left-nav-btn">
-		<img src = "/assets/notes-icn.png" class = "left-nav-icn" id = "note-left-icn">
-		<p class = "left-nav-label">Notes</p>
-	</div>
+	<a href = "/notes/index">
+		<div class = "left-nav-btn">
+			<img src = "/assets/notes-icn.png" class = "left-nav-icn" id = "note-left-icn">
+			<p class = "left-nav-label">Notes</p>
+		</div>
+	</a>
 </div>
 <div class = "app-container">
 	<div id = "dashboard-component-1">
@@ -61,8 +63,11 @@
 					} else {
 						$("#<%= date %>").css("margin-left", "calc(<%= 3.4 * date %>% - <%= 14 * date %>px + 320px)")
 					}
+					if ($(window).width() < 630) {
+						$(".half-graph-btn-option 1z").hide();
+					}
 				};
-				$(document).ready(update);    // When the page first loads
+				$(document).ready(update);
 				$(window).resize(update);
 				</script>
 			<% end %>
@@ -70,38 +75,64 @@
 	</div>
 	<% tocount = 0 %>
 	<% @adherencegraphs.each do |addgraph| %>
-	<% tocount += 1 %>
-	<div class = "half-graph-container" id = "<%= tocount %>y">
-		<div class = "half-graph-tool-bg">
-			<p class = "half-graph-label">Concerta, 36mg</p>
-			<div class = "half-graph-btn-option 1z">
-				<div class = "option1x"><p>Simple #</p></div>
-				<div class = "option2x"><p>Contrast</p></div>
-			</div>
-			<div class = "half-graph-btn 1q"><p>Simple %</p></div>
-			<script>
-				var ioz = false;
-				$("#<%= tocount %>y .1q").click(function() {
-					if (ioz === false) {
-						$("#<%= tocount %>y .1z").animate({height: "103px"}, 300);
-						ioz = true;
-					} else {
-						$("#<%= tocount %>y .1z").animate({height: "20px"}, 300);
-						ioz = false;
-					}
-				});
-			</script>
-			<% if tocount <= 2 %>
+		<% tocount += 1 %>
+		<% curmed = Medication.find(addgraph[0]) %>
+		<div class = "half-graph-container" id = "<%= tocount %>y">
+			<div class = "half-graph-tool-bg">
+				<p class = "half-graph-label"><%= curmed.name %>, <%= curmed.dose %></p>
+				<div class = "half-graph-btn-option 1z">
+					<div class = "option1x"><p>Simple #</p></div>
+					<div class = "option2x"><p>Contrast</p></div>
+				</div>
+				<div class = "half-graph-btn 1q"><p>Simple %</p></div>
 				<script>
-					$("#<%= tocount %>y").css("margin-top", "290px")
+					var ioz = false;
+					$("#<%= tocount %>y .1q").click(function() {
+						if (ioz === false) {
+							$("#<%= tocount %>y .1z").animate({height: "103px"}, 300);
+							ioz = true;
+						} else {
+							$("#<%= tocount %>y .1z").animate({height: "20px"}, 300);
+							ioz = false;
+						}
+					});
 				</script>
+				<% if tocount <= 2 %>
+					<script>
+						$("#<%= tocount %>y").css("margin-top", "290px")
+					</script>
+				<% end %>
+				<div class = "div-line"></div>
+			</div>
+			<div id = "flexbox">
+			<% o = 0 %>
+			<% for graphval in addgraph[1] %>
+				<% o += 1 %>
+				<% if o == 1 %>
+					<div class = "sub-percent-block" style = "height: <%= 200 * graphval[1] + 1 %>px"></div
+				<% elsif o == 31 %>
+					><div class = "sub-percent-block" style = "height: <%= 200 * graphval[1] + 1 %>px"></div>
+				<% else %>
+					><div class = "sub-percent-block" style = "height: <%= 200 * graphval[1] + 1 %>px"></div
+				<% end %>
 			<% end %>
-			<div class = "div-line"></div>
+			</div>
 		</div>
-	</div>
 	<% end %>
 
 <script>
+	function updateit() {
+		if ($(window).width() < 632) {
+			$(".half-graph-btn").hide();
+			$(".half-graph-btn-option").hide();
+		} else {
+			$(".half-graph-btn").show();
+			$(".half-graph-btn-option").show();
+		}
+	}
+	$(document).ready(updateit);
+	$(window).resize(updateit);
+
 	$(".ui-toolbar-adduser-option").hide();
 	var io = false;
 	$(".ui-toolbar-adduser").click(function() {
@@ -114,5 +145,22 @@
 		}
 	});
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

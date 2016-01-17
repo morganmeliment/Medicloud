@@ -1,0 +1,86 @@
+.note-selector {
+	width: calc(100% - 60px);
+	height: 60px;
+	background-color: white;
+	border: 1px solid #e3e7ea;
+	margin: 10px 0 0 28px;
+	cursor: pointer;
+}
+.note-selector:hover {
+	background-color: #fcfdfe;
+}
+.note-selector-icon {
+	position: absolute;
+	height: 20px;
+	margin: 20px 0 0 20px;
+	opacity: .9;
+}
+.note-cell-label {
+	font-size: 13px;
+	margin: 22px 0 0 53px;
+	position: absolute;
+}
+.viewnote-btn {
+	position: absolute;
+	height: 15px;
+	right: 60px;
+	margin-top: 22px;
+}
+.note-delete-icn {
+	position: absolute;
+	height: 19px;
+	right: 100px;
+	margin-top: 20px;
+}
+.submit-med-form {
+	width: 125px;
+	height: 36px;
+	border: 1px solid #e3e7ea;
+	border-radius: 3px;
+	margin: 60px 0 0 calc(75% - 127px);
+	cursor: pointer;
+}
+.submit-med-form p {
+	width: 124px;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 9px;
+}
+.submit-med-form:hover {
+	background-color: #dcf5e7;
+}
+.large-textarea {
+	width: calc(50% - 10px);
+	height: 200px;
+	border: 1px solid #e3e7ea;
+	border-radius: 2px;
+	padding: 10px 10px 0 10px;
+	resize: none;
+	-webkit-user-select: auto;
+	margin-top: 10px;
+	outline: none;
+	font-family: 'Montserrat';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -166,7 +166,7 @@ class DashboardController < ApplicationController
 				@adherencegraph[day] = 0.0
 			end
 		end
-		@adherencegraphs.push @adherencegraph.to_a
+		@adherencegraphs.push [med.id, @adherencegraph.to_a]
 	end
 
 	# Final calculated adherence in @adherence
