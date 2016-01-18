@@ -6,9 +6,9 @@ class MedicationsController < ApplicationController
   def completemedsearch
   	fin = []
     #.split(' ').map(&:capitalize).join(' ')
-  	MedDb.search(params[:term]).each do |med|
+  	MedDb.search(params[:term].downcase).each do |med|
   		if med.name.length < 15
-  			fin.push med.name
+  			fin.push med.name.split(' ').map(&:capitalize).join(' ')
   		end
   	end
   	fini = fin.sort_by(&:length)

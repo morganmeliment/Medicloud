@@ -20,7 +20,7 @@
 }
 .med-list-heart-icn {
 	height: 19px;
-	margin: 19px 0 0 20px;
+	margin: 20px 0 0 20px;
 	position: absolute;
 }
 #medication-list-header p {
@@ -214,6 +214,81 @@ textarea {
 	cursor: pointer;
 	opacity: .7;
 }
+.sole-selector-select {
+	width: 90px;
+	height: 50px;
+	outline: none;
+	font-size: 14px;
+	border: none;
+	margin-left: 60px;
+	position: relative;
+	-webkit-appearance: none;
+}
+.sole-selector-select-container {
+	width: 150px;
+	height: 50px;
+	border-radius: 4px;
+	border: 1px solid #e3e7ea;
+	position: absolute;
+	left: calc(50% + 50px);
+	margin-top: 10px;
+}
+.sole-selector-numinput-container {
+	width: 150px;
+	height: 50px;
+	border-radius: 4px;
+	border: 1px solid #e3e7ea;
+	position: absolute;
+	left: calc(50% - 200px);
+	margin-top: 10px;
+}
+.sole-selector-numinput {
+	outline: none;
+	border: none;
+	width: 146px;
+	margin-top: 15px;
+	text-align: center;
+	position: relative;
+	font-size: 14px;
+}
+.sole-selector-numinput::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: none;
+}
+.schedule-times-label {
+	position: absolute;
+	font-size: 11px;
+	margin-top: 29px;
+	width: 100%;
+	text-align: center;
+	pointer-events: none;
+}
+.schedule-label {
+	font-size: 11px;
+	margin: 20px 0 0 calc(50% - 200px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

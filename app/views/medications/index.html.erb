@@ -1,11 +1,11 @@
 <div class = "popup" id = "create-user-form">
 	<div class = "form-nav-header">
-		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn">
+		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click">
 		<p class = "form-nav-title">Add Medication For <%= viewuser.firstname.capitalize %></p>
 	</div>
 	<form>
 		<p class = "large-textinput-label">Medication Name:</p>
-		<input class = "large-textinput center" id = "autocomplete" type = "text">
+		<input class = "large-textinput center" id = "autocomplete" type = "text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 
 		<p class = "dual-selector-label">Dose:</p>
 		<div class = "dual-selector">
@@ -15,9 +15,48 @@
 			<div class = "dual-selector-twohalf">
 				<select class = "dual-selector-select">
 					<option value = "mg">mg</option>
-					<option value = "mg">g</option>
-					<option value = "mg">ml</option>
-					<option value = "mg">L</option>
+					<option value = "g">g</option>
+					<option value = "ml">ml</option>
+					<option value = "L">L</option>
+				</select>
+			</div>
+		</div>
+
+		<p class = "schedule-label">Schedule:</p>
+		<div class = "sole-selector-numinput-container">
+			<input class = "sole-selector-numinput" type = "number" value = "0">
+		</div>
+		<p class = "schedule-times-label">Times Per</p>
+		<div class = "sole-selector-select-container">
+			<select class = "sole-selector-select">
+				<option value = "day">Day</option>
+				<option value = "week">Week</option>
+				<option value = "month">Month</option>
+			</select>
+		</div><br><br><br><br>
+
+		<p class = "dual-selector-label">Notifications:</p>
+		<div class = "dual-selector">
+			<div class = "dual-selector-onehalf">
+				<select class = "dual-selector-select">
+					<option value = "1">1:00</option>
+					<option value = "2">2:00</option>
+					<option value = "3">3:00</option>
+					<option value = "4">4:00</option>
+					<option value = "5">5:00</option>
+					<option value = "6">6:00</option>
+					<option value = "7">7:00</option>
+					<option value = "8" selected>8:00</option>
+					<option value = "9">9:00</option>
+					<option value = "10">10:00</option>
+					<option value = "11">11:00</option>
+					<option value = "12">12:00</option>
+				</select>
+			</div>
+			<div class = "dual-selector-twohalf">
+				<select class = "dual-selector-select">
+					<option value = "am">am</option>
+					<option value = "pm">pm</option>
 				</select>
 			</div>
 		</div>
@@ -28,6 +67,14 @@
 	</form>
 </div>
 <div class = "shade-behind-popup">
+</div>
+<div class = "popup2" id = "view-item-popup">
+	<div class = "form-nav-header">
+		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click2">
+		<p class = "form-nav-title" id = "dynamic-title"></p>
+	</div>
+</div>
+<div class = "shade-behind-popup2">
 </div>
 
 <!-- Toolbar -->
@@ -73,6 +120,7 @@
 		<div id = "medication-list-view">
 			<% @medications.each do |med| %>
 				<div class = "med-table-cell">
+					<span class = "id-med" style = "display: none;"><%= med.id %></span>
 					<p class = "med-cell-label"><%= med.name %>, <%= med.dose %></p>
 					<img src = "/assets/red-delete-icn.png" class = "med-delete-icn">
 					<img src = "/assets/forward-icn.png" class = "viewmed-btn">
@@ -99,10 +147,10 @@ $(function() {
 	var io = false;
 	$("#export-btn").click(function() {
 		if (io === false) {
-			$(".ui-toolbar-adduser-option").fadeToggle();
+			$(".ui-toolbar-adduser-option").fadeToggle(300);
 			io = true;
 		} else {
-			$(".ui-toolbar-adduser-option").fadeToggle();
+			$(".ui-toolbar-adduser-option").fadeToggle(300);
 			io = false;
 		}
 	});
@@ -110,11 +158,20 @@ $(function() {
 	$(".popup").hide();
 	$(".shade-behind-popup").hide();
 	$(".med-delete-icn").hide();
+	$(".popup2").hide();
+	$(".shade-behind-popup2").hide();
 
 	$("#add-med-selector").click(function() {
 		$(".shade-behind-popup").css("pointer-events", "auto");
 		$(".popup").fadeToggle();
 		$(".shade-behind-popup").fadeToggle();
+	});
+
+	$(".med-table-cell").click(function() {
+		$(".shade-behind-popup2").css("pointer-events", "auto");
+		$(".popup2").fadeToggle();
+		$(".shade-behind-popup2").fadeToggle();
+		$("#dynamic-title").text($(this).find(".id-med").text());
 	});
 
 	$(".ui-delete-icn").click(function() {
@@ -127,7 +184,19 @@ $(function() {
 		$(".shade-behind-popup").fadeToggle();
 	});
 
-	$(".form-nav-back-btn").click(function() {
+	$(".shade-behind-popup2").click(function() {
+		$(".shade-behind-popup2").css("pointer-events", "none");
+		$(".popup2").fadeToggle();
+		$(".shade-behind-popup2").fadeToggle();
+	});
+
+	$("#back-to-click2").click(function() {
+		$(".shade-behind-popup2").css("pointer-events", "none");
+		$(".popup2").fadeToggle();
+		$(".shade-behind-popup2").fadeToggle();
+	});
+
+	$("#back-to-click").click(function() {
 		$(".shade-behind-popup").css("pointer-events", "none");
 		$(".popup").fadeToggle();
 		$(".shade-behind-popup").fadeToggle();

@@ -61,6 +61,31 @@
 	outline: none;
 	font-family: 'Montserrat';
 }
+.popup2 {
+	position: absolute;
+	width: calc(100% - 60px);
+	height: calc(100% - 60px);
+	top: 30px;
+	left: 30px;
+	border-radius: 5px;
+	background-color: white;
+	z-index: 15;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.shade-behind-popup2 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	background-color: black;
+	opacity: .1;
+	z-index: 14;
+}
+
+
+
 
 
 

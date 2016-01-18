@@ -34,18 +34,20 @@
 		<div class = "dashboard-component-1-1">
 			<span><div id = "counter">0.0</div>%</span>
 			<p>Adherence Rating</p>
-			<script>
-				$({countNum: $('#counter').text()}).animate({countNum: parseInt("<%= @adherence %>")}, {
-  					duration: 700,
-  					easing:'linear',
-  					step: function() {
-    					$('#counter').text(Math.round(this.countNum * 10) / 10);
-  					},
-  					complete: function() {
-    					$('#counter').text("<%= @adherence %>");
-  					}
-				});
-			</script>
+			<% if @adherence > 0 %>
+				<script>
+					$({countNum: $('#counter').text()}).animate({countNum: parseInt("<%= @adherence %>")}, {
+  						duration: 700,
+  						easing:'linear',
+  						step: function() {
+    						$('#counter').text(Math.round(this.countNum * 10) / 10);
+  						},
+  						complete: function() {
+    						$('#counter').text("<%= @adherence %>");
+  						}
+					});
+				</script>
+			<% end %>
 		</div>
 		<div id = "column-divider"></div>
 		<div class = "dashboard-component-1-2">
@@ -137,10 +139,10 @@
 	var io = false;
 	$(".ui-toolbar-adduser").click(function() {
 		if (io === false) {
-			$(".ui-toolbar-adduser-option").fadeToggle();
+			$(".ui-toolbar-adduser-option").fadeToggle(300);
 			io = true;
 		} else {
-			$(".ui-toolbar-adduser-option").fadeToggle();
+			$(".ui-toolbar-adduser-option").fadeToggle(300);
 			io = false;
 		}
 	});
