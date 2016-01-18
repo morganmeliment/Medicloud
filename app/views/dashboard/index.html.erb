@@ -109,13 +109,37 @@
 			<div id = "flexbox">
 			<% o = 0 %>
 			<% for graphval in addgraph[1] %>
-				<% o += 1 %>
-				<% if o == 1 %>
-					<div class = "sub-percent-block" style = "height: <%= 200 * graphval[1] + 1 %>px"></div
-				<% elsif o == 31 %>
-					><div class = "sub-percent-block" style = "height: <%= 200 * graphval[1] + 1 %>px"></div>
-				<% else %>
-					><div class = "sub-percent-block" style = "height: <%= 200 * graphval[1] + 1 %>px"></div
+				<% o += 1
+				if o == 1
+					prevg = addgraph[1][0][1]
+					nextg = addgraph[1][o][1]
+					thisg = graphval[1]
+				elsif o == 31
+					prevg = addgraph[1][o - 2][1]
+					nextg = addgraph[1][o - 1][1]
+					thisg = graphval[1]
+				else
+					prevg = addgraph[1][o - 2][1]
+					nextg = addgraph[1][o][1]
+					thisg = graphval[1]
+				end
+				%>
+				<% if prevg == 0 && thisg == 0 && nextg == 0 %>
+					<img class = "sub-percent-block" src = "/assets/rect11109.png" style = "height: 58px;">
+				<% elsif prevg != 0 && thisg == 0 && nextg == 0 %>
+					<img class = "sub-percent-block" src = "/assets/path11104.png" style = "height: 94px;">
+				<% elsif prevg != 0 && thisg != 0 && nextg == 0 %>
+					<img class = "sub-percent-block" src = "/assets/g11114.png" style = "height: 178px;">
+				<% elsif prevg != 0 && thisg == 0 && nextg != 0 %>
+					<img class = "sub-percent-block" src = "/assets/path11088.png" style = "height: 94px;">
+				<% elsif prevg != 0 && thisg != 0 && nextg != 0 %>
+					<img class = "sub-percent-block" src = "/assets/rect11035.png" style = "height: 178px;">
+				<% elsif prevg == 0 && thisg != 0 && nextg == 0 %>
+					<img class = "sub-percent-block" src = "/assets/path11086.png" style = "height: 178px;">
+				<% elsif prevg == 0 && thisg != 0 && nextg != 0 %>
+					<img class = "sub-percent-block" src = "/assets/g11094.png" style = "height: 178px;">
+				<% elsif prevg == 0 && thisg == 0 && nextg != 0 %>
+					<img class = "sub-percent-block" src = "/assets/path11111.png" style = "height: 94px;">
 				<% end %>
 			<% end %>
 			</div>
