@@ -1,18 +1,33 @@
 <!-- Add User Form -->
 <div class = "popup" id = "create-user-form">
-	<img>
-	<p>Add New User</p>
-	<%= form_tag createuser_path, :method => 'post' do %>
-		<%= text_field_tag :firstname %>
-		<%= text_field_tag :lastname %>
-		<%= text_field_tag :encryptedpassw %>
-		<select name = "role">
-			<option value = "patient">Patient</option>
-			<option value = "physician">Physician</option>
-			<option value = "admin">Admin</option>
-		</select>
-		<%= submit_tag "Create" %>
-	<% end %>
+	<div class = "form-nav-header">
+		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click">
+		<p class = "form-nav-title">Add User</p>
+	</div>
+	<form>
+		<p class = "large-textinput-label">First Name:</p>
+		<input class = "large-textinput center" id = "autocomplete" type = "text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+		<p class = "large-textinput-label">Last Name:</p>
+		<input class = "large-textinput center" id = "autocomplete" type = "text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+		<p class = "large-textinput-label">Password:</p>
+		<input class = "large-textinput center" id = "autocomplete" type = "password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+
+		<!--<p class = "schedule-times-label">Role:</p>-->
+		<div class = "sole-selector-select-container center">
+			<select class = "sole-selector-select">
+				<option value = "day">Patient</option>
+				<option value = "week">Physician</option>
+				<option value = "month">Admin</option>
+			</select>
+		</div>
+
+		<div class = "submit-med-form">
+			<p>Create</p>
+		</div>
+	</form>
 </div>
 <div class = "shade-behind-popup">
 </div>
@@ -70,6 +85,12 @@
 	});
 
 	$(".shade-behind-popup").click(function() {
+		$(".shade-behind-popup").css("pointer-events", "none");
+		$(".popup").fadeToggle();
+		$(".shade-behind-popup").fadeToggle();
+	});
+
+	$("#back-to-click").click(function() {
 		$(".shade-behind-popup").css("pointer-events", "none");
 		$(".popup").fadeToggle();
 		$(".shade-behind-popup").fadeToggle();

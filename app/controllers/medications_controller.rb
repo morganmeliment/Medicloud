@@ -1,6 +1,10 @@
 class MedicationsController < ApplicationController
   def index
   	@medications = Medication.where(:userid => viewuser.id)
+    @medarray = []
+    for med in @medications
+      @medarray.push med
+    end
   end
 
   def completemedsearch
