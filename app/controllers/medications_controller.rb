@@ -5,6 +5,8 @@ class MedicationsController < ApplicationController
     for med in @medications
       @medarray.push med
     end
+    @medarray.sort! {|x, y| x.id <=> y.id}
+    @medications = @medarray
   end
 
   def completemedsearch

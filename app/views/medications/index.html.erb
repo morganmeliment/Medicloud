@@ -172,7 +172,13 @@ $(function() {
 		$(".shade-behind-popup2").css("pointer-events", "auto");
 		$(".popup2").fadeToggle();
 		$(".shade-behind-popup2").fadeToggle();
-		$("#dynamic-title").text($(this).find(".id-med").text());
+		$.ajax({
+			method: "GET",
+			url: "/getmedinfoweb?ind="+$(this).find(".id-med").text(),
+			success: function(d) {
+				$("#dynamic-title").text(d.name+", "+d.dose);
+			},
+		});
 	});
 
 	$(".ui-delete-icn").click(function() {

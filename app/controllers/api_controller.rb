@@ -356,6 +356,10 @@ def getnoteinfo
 	render :json => [@note.name, @note.notecontent]
 end
 
+def getmedinfoweb
+	render :json => Medication.where(:userid => viewuser.id).first(params[:ind]).last()
+end
+
 def registerdevice
 	@user = User.find(params[:id])
 	if @user.deviceids.include? params[:devid]
