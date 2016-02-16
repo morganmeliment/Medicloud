@@ -1,7 +1,7 @@
 <!-- Toolbar -->
 <div class = "ui-toolbar">
 	<a href = "/control/index?isvalid=t" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
-	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
+	<p class = "left-toolbar-text" id = "further-right"><%= decrypt(viewuser.fullname) %></p>
 	<div class = "ui-toolbar-adduser"><p>Export As</p></div>
 	<div class = "ui-toolbar-adduser-option">
 		<div class = "option1"><p>.csv</p></div>
@@ -81,12 +81,12 @@
 		<% curmed = Medication.find(addgraph[0]) %>
 		<div class = "half-graph-container" id = "<%= tocount %>y">
 			<div class = "half-graph-tool-bg">
-				<p class = "half-graph-label"><%= curmed.name %>, <%= curmed.dose %></p>
-				<div class = "half-graph-btn-option 1z">
+				<p class = "half-graph-label"><%= decrypt(curmed.name) %>, <%= decrypt(curmed.dose) %></p>
+				<!--<div class = "half-graph-btn-option 1z">
 					<div class = "option1x"><p>Simple #</p></div>
 					<div class = "option2x"><p>Contrast</p></div>
 				</div>
-				<div class = "half-graph-btn 1q"><p>Simple %</p></div>
+				<div class = "half-graph-btn 1q"><p>Simple %</p></div>-->
 				<script>
 					var ioz = false;
 					$("#<%= tocount %>y .1q").click(function() {

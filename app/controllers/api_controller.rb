@@ -3,7 +3,7 @@ class ApiController < ApplicationController
 require "open-uri"
 def generateSchedule(usid, days)
   	@daystoconsider = days
-
+  	# REWRITE THIS!!! MULTIPLE BUGS
   	# @medsfordays will be the days that the medication is supposed to be taken, 100% adherence
 	@medsfordays = {}
 
@@ -13,9 +13,16 @@ def generateSchedule(usid, days)
 		@medsfordays[b] = []
 	end
 
+	@usermeds = []
+	Medication.all.each do |medication|
+		if decrypt(medication.userid) == decrypt(usid)
+			@usermeds.push medication
+		end
+	end
+
 	# This calculates @medsfordays
-	Medication.where(:userid => usid).each do |medication|
-		frequency = medication.schedule
+	@usermeds.each do |medication|
+		frequency = decrypt(medication.schedule)
 		timestamp = medication.created_at.localtime
 		int = @daystoconsider + 1
 		@daystoconsider.times do
@@ -357,7 +364,86 @@ def getnoteinfo
 end
 
 def getmedinfoweb
-	render :json => Medication.where(:userid => viewuser.id).first(params[:ind]).last()
+	medications = []
+	Medication.all.each do |med|
+		if decrypt(med.userid) == viewuser.id
+			dun = decrypt(med.dose)
+			["mg", "g", "ml", "L"].each do |rep| 
+				dun.gsub!(rep, "")
+			end
+			dmes = decrypt(med.dose).gsub(dun, "")
+			nottime = decrypt(med.notification_time).split(" ")
+			dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize, :prectimenum => nottime[0], :prectimeun => nottime[1]}                      
+
+			@medsforday = generateSchedule(med.userid, 31)
+
+			@takendays = {}
+			qd = 1
+			31.times do
+				@takendays[qd] = []
+				qd += 1
+			end
+			med.datapoints.each do |datapoint|
+				daysago = (Date.today - datapoint[0].to_date).to_i
+				if daysago < 31
+					if datapoint[1] == "true"
+						@takendays[daysago].push med.id
+					end
+				end
+			end
+
+			@adherencegraph = {}
+			qb = 1
+			31.times do
+				@adherencegraph[qb] = 0.0
+				qb += 1
+			end
+
+			@medsforday.each do |day, idarr|
+				idarr.each do |id|
+					if id == med.id
+						@adherencegraph[day] += 1
+					end
+				end
+			end
+
+			medspecifarry = {}
+			qt = 1
+			31.times do
+				medspecifarry[qt] = 0
+				qt += 1
+			end
+			@takendays.each do |day, idarr|
+				idarr.each do |id|
+					if id == med.id
+						medspecifarry[day] += 1
+					end
+				end
+			end
+			@adherencegraph.each do |day, count|
+				if medspecifarry[day] != 0 && count != 0
+					@adherencegraph[day] = medspecifarry[day].to_f / count * 100
+				elsif medspecifarry[day] == 0 && count != 0
+					@adherencegraph[day] = 0.0
+				end
+			end
+
+			medications.push [dem, @adherencegraph]
+		end
+	end
+	render :json => medications[decrypt(params[:ind]).to_i - 1]
+end
+
+def getnoteinfoweb
+	notes = []
+	Note.all.each do |note|
+		if decrypt(note.userid) == viewuser.id
+			note.name = decrypt(note.name)
+			note.notecontent = decrypt(note.notecontent)
+			notes.push note
+		end
+	end
+	render :json => notes[decrypt(params[:ind]).to_i - 1]
 end
 
 def registerdevice
@@ -377,6 +463,10 @@ def sendnotification
 		APNS.send_notification(e, :alert => "You have 2 medications to take.", :message => "hello")
 	end
 	render :text => " "
+end
+
+def checkforinteractions
+
 end
 
 #class end

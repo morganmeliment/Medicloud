@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  get '/users/sign_in', to: 'signin#index'
+  get '/users/register', to: 'signin#register'
+  post '/signin', to: 'signin#signin'
+  post '/register', to: 'signin#registerpost'
+  post '/addmed', to: 'medications#create'
+  post '/medupdate', to: 'medications#update'
+  post '/addnote', to: 'notes#create'
+  post '/noteupdate', to: 'notes#update'
+  get 'homepage/signout'
+
+  get 'control/generatesignup'
+
+  get 'notes/delete'
+  get 'medications/checkforinteractions'
+
+  get 'medications/delete'
+
   get 'notes/index'
 
   get 'medications/index'
@@ -41,6 +58,8 @@ Rails.application.routes.draw do
 
   get '/completemedsearch', to: 'medications#completemedsearch'
   get '/getmedinfoweb', to: 'api#getmedinfoweb'
+  get '/getnoteinfoweb', to: 'api#getnoteinfoweb'
+  post '/user/new', to: 'control#newuser'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

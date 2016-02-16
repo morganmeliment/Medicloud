@@ -1,0 +1,70 @@
+<div id = "sign-in-nav" style = "height: 60px;">
+	<img src = "/assets/logo-small.png">
+	<p class = "url-middle">www.medicloud.io</p>
+	<p class = "org-name-right"><%= params[:org].split('_').join(' ') %></p>
+</div><br>
+
+<p class = "label-text-filler" style = "margin-top: 30px;"><b>Login Name:</b> <%= params[:name].split('_').join(' ') %></p><br>
+<p class = "label-text-filler"><b>Access Code:</b> <%= params[:code] %></p><br><br><br>
+
+<p class = "label-text-filler" style = "font-size: 14px;">Follow the instructions on our mobile app to get started.</p><br>
+
+<div id = "perferated-line"></div>
+
+<style>
+#sign-in-nav img {
+	height: 30px;
+	margin: 15px 0 0 35px;
+	position: absolute;
+}
+.url-middle {
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+	margin: 21px 0 0 0;
+	position: absolute;
+}
+.org-name-right {
+	position: absolute;
+	right: 35px;
+	font-size: 14px;
+	margin-top: 21px;
+}
+#perferated-line {
+	margin-top: 50px;
+	width: 100%;
+	border: 1px dashed rgb(201, 201, 201);
+}
+.label-text-filler {
+	text-align: center;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

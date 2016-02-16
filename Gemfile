@@ -7,6 +7,9 @@ gem 'rails', '4.2.4'
 gem "apns"
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+
+gem "pdfkit"
+gem "wkhtmltopdf-binary"
 #For timing notifications
 gem 'whenever'
 # Use SCSS for stylesheets
@@ -18,7 +21,6 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 group :production do
-  gem 'pg'
   gem 'puma'
 end
 # Use jquery as the JavaScript library
@@ -31,7 +33,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

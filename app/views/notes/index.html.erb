@@ -1,24 +1,28 @@
 <div class = "popup" id = "create-user-form">
 	<div class = "form-nav-header">
 		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click">
-		<p class = "form-nav-title">Add Note For <%= viewuser.firstname.capitalize %></p>
+		<p class = "form-nav-title">Add Note For <%= decrypt(viewuser.firstname).capitalize %></p>
 	</div>
-	<form>
+	<form action = "/addnote" method = "post">
+		<input type = "hidden" value = "<%= encrypt(session[:viewuser]) %>" name = "auth">
 		<p class = "large-textinput-label">Note Title:</p>
-		<input class = "large-textinput center" type = "text">
+		<input class = "large-textinput center" type = "text" name = "notename">
 
 		<p class = "large-textinput-label">Note Content:</p>
-		<textarea class = "large-textarea center"></textarea>
+		<textarea class = "large-textarea center" name = "notecontent"></textarea>
 
-		<div class = "submit-med-form">
-			<p>Create</p>
-		</div>
+		<input class = "submit-med-form input-sub-med" type = "submit" value = "Create">
 	</form>
 </div>
-<div class = "popup2" id = "view-item-popup">
-	<div class = "form-nav-header">
+<div class = "popup2" id = "view-item-popup" style = "background-color: #fcfdfe;">
+	<div class = "form-nav-header" style = "background-color: white;">
 		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click2">
 		<p class = "form-nav-title" id = "dynamic-title"></p>
+		<img src = "/assets/ui-edit-icn.png" class = "left-edit-icon" style = "margin: 18px 80px 0 0;">
+		<a href = "" class = "delete-selector"><img src = "/assets/ui-delete-icn.png" class = "ui-delete-icn" style = "opacity: 1; right: 30px; left: auto;"></a>
+	</div>
+	<div class = "note-text-display">
+		<p id = "dynamic-notecontent"></p>
 	</div>
 </div>
 <div class = "shade-behind-popup2">
@@ -29,7 +33,7 @@
 <!-- Toolbar -->
 <div class = "ui-toolbar">
 	<a href = "/control/index?isvalid=t" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
-	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
+	<p class = "left-toolbar-text" id = "further-right"><%= decrypt(viewuser.fullname) %></p>
 	<div class = "ui-toolbar-adduser" id = "export-btn" style = "right: 121px;"><p>Export As</p></div>
 	<div class = "ui-toolbar-adduser-option" style = "right: 121px;">
 		<div class = "option1"><p>.csv</p></div>
@@ -66,9 +70,9 @@
 		<% else %>
 			<div class = "note-selector">
 		<% end %>
-			<span class = "id-note" style = "display: none;"><%= note.id %></span>
+			<span class = "id-note" style = "display: none;"><%= encrypt(e) %></span>
 			<img src = "/assets/dark-notes-icn.png" class = "note-selector-icon">
-			<p class = "note-cell-label"><%= note.name %>, <%= note.notecontent.split('').first(10).join('') %>...</p>
+			<p class = "note-cell-label"><%= decrypt(note.name) %>, <%= decrypt(note.notecontent).split('').first(10).join('') %>...</p>
 			<!--<img src = "/assets/red-delete-icn.png" class = "note-delete-icn">-->
 			<img src = "/assets/forward-icn.png" class = "viewnote-btn">
 		</div>
@@ -103,11 +107,23 @@
 		$(".shade-behind-popup2").css("pointer-events", "auto");
 		$(".popup2").fadeToggle();
 		$(".shade-behind-popup2").fadeToggle();
-		$("#dynamic-title").text($(this).find(".id-note").text());
+		var currnote = $(this).find(".id-note").text();
+		$.ajax({
+			method: "GET",
+			url: "/getnoteinfoweb?ind="+currnote,
+			success: function(d) {
+				$("#dynamic-title").text(d.name);
+				$("#dynamic-notecontent").text(d.notecontent);
+				$(".delete-selector").attr('href', "/notes/delete?ncount="+currnote);
+			},
+		});
 	});
 
-	$(".ui-delete-icn").click(function() {
-		$(".med-delete-icn").toggle();
+	$(".ui-delete-icn").click(function(e) {
+		var should = confirm("Are you sure? This action is not reversible.");
+		if (should != true) {
+			e.preventDefault();
+		}
 	});
 
 	$(".shade-behind-popup").click(function() {

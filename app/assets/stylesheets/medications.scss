@@ -39,7 +39,10 @@
 	background-color: white;
 	cursor: pointer;
 	border-radius: 5px;
-	margin: 10px 0 0 10px;
+	margin: 10px 9px 0 0;
+	float: right;
+	position: relative;
+	z-index: 3;
 }
 .med-table-cell:hover {
 	background-color: #fcfdfe;
@@ -65,20 +68,24 @@ p {
 .viewmed-btn {
 	position: absolute;
 	height: 15px;
-	margin: 17px 0 0 calc(70% - 120px);
+	margin-top: 17px;
+	right: 20px;
 }
 .med-delete-icn {
 	position: absolute;
-	height: 19px;
-	margin: 15px 0 0 calc(70% - 160px);
+	height: 23px;
+	margin: 23px 0 0 22px;
+	cursor: pointer;
 }
 #med-interaction-field {
 	width: calc(30% - 20px);
 	min-width: 300px;
 	height: 150px;
+	max-height: calc(100% - 62px);
 	position: absolute;
 	left: calc(70% - 12px);
 	top: 20px;
+	overflow: scroll;
 	background-color: #fcfdfe;
 	border-radius: 4px;
 	border: 1px solid #e3e7ea;
@@ -286,6 +293,90 @@ textarea {
 .ui-large-btn:hover {
 	background-color: #dcf5e7;
 }
+.upper-left-label {
+	font-size: 14px;
+	margin: 20px 0 0 25px;
+}
+.left-edit-icon {
+	height: 22px;
+	float: right;
+	margin: 19px 30px 0 0;
+	cursor: pointer;
+}
+#interactions-found {
+	display: inline-block;
+	font-size: 13px;
+	margin: 15px 0 0 15px;
+}
+.alert-img {
+	position: absolute;
+	height: 20px;
+	right: 15px;
+	margin-top: 13px;
+}
+.interaction-box {
+	width: calc(100% - 31px);
+	margin: 15px 0 0 15px;
+	height: auto;
+	background-color: white;
+	border-radius: 3px;
+	border: 1px solid #e3e7ea;
+}
+.int-title {
+	font-size: 13px;
+	margin: 8px 0 8px 13px;
+}
+.int-divider {
+	width: 100%;
+	height: 1px;
+	background-color: #e3e7ea;
+}
+.int-body {
+	font-size: 13px;
+	width: calc(100% - 27px);
+	margin: 10px 0 0 13px;
+	padding-bottom: 13px;
+}
+.popup3 {
+	position: absolute;
+	width: calc(100% - 60px);
+	height: calc(100% - 60px);
+	top: 30px;
+	left: 30px;
+	border-radius: 5px;
+	background-color: white;
+	z-index: 20;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+#popup-cancel-button {
+	position: absolute;
+	margin: 21px 0 0 30px;
+	cursor: pointer;
+}
+#popup-update-button {
+	position: absolute;
+	margin: 21px 0 0 0;
+	right: 30px;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

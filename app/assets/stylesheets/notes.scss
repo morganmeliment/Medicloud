@@ -83,6 +83,34 @@
 	opacity: .1;
 	z-index: 14;
 }
+.note-text-display {
+	 width: calc(100% - 60px);
+	 position: absolute;
+	 margin: 25px 0 0 30px;
+	 height: calc(100% - 150px);
+	 border-radius: 3px;
+	 border: 1px solid #e3e7ea;
+	 background-color: white;
+}
+#dynamic-notecontent {
+	width: calc(100% - 50px);
+	text-align: center;
+	margin: 20px 0 0 25px;
+	font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

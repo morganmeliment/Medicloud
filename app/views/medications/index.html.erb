@@ -1,19 +1,20 @@
 <div class = "popup" id = "create-user-form">
 	<div class = "form-nav-header">
 		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click">
-		<p class = "form-nav-title">Add Medication For <%= viewuser.firstname.capitalize %></p>
+		<p class = "form-nav-title">Add Medication For <%= decrypt(viewuser.firstname).capitalize %></p>
 	</div>
-	<form>
+	<form action = "/addmed" method = "post">
+		<input type = "hidden" value = "<%= encrypt(session[:viewuser]) %>" name = "auth">
 		<p class = "large-textinput-label">Medication Name:</p>
-		<input class = "large-textinput center" id = "autocomplete" type = "text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+		<input class = "large-textinput center" id = "autocomplete" type = "text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name = "name">
 
 		<p class = "dual-selector-label">Dose:</p>
 		<div class = "dual-selector">
 			<div class = "dual-selector-onehalf">
-				<input class = "dual-selector-numinput" type = "number" value = "0">
+				<input class = "dual-selector-numinput" type = "number" value = "0" name = "dosenum">
 			</div>
 			<div class = "dual-selector-twohalf">
-				<select class = "dual-selector-select">
+				<select class = "dual-selector-select" name = "doseun">
 					<option value = "mg">mg</option>
 					<option value = "g">g</option>
 					<option value = "ml">ml</option>
@@ -24,11 +25,11 @@
 
 		<p class = "schedule-label">Schedule:</p>
 		<div class = "sole-selector-numinput-container">
-			<input class = "sole-selector-numinput" type = "number" value = "0">
+			<input class = "sole-selector-numinput" type = "number" value = "0" name = "times">
 		</div>
 		<p class = "schedule-times-label">Times Per</p>
 		<div class = "sole-selector-select-container">
-			<select class = "sole-selector-select">
+			<select class = "sole-selector-select" name = "timeunit">
 				<option value = "day">Day</option>
 				<option value = "week">Week</option>
 				<option value = "month">Month</option>
@@ -38,7 +39,7 @@
 		<p class = "dual-selector-label">Notifications:</p>
 		<div class = "dual-selector">
 			<div class = "dual-selector-onehalf">
-				<select class = "dual-selector-select">
+				<select class = "dual-selector-select" name = "time">
 					<option value = "1">1:00</option>
 					<option value = "2">2:00</option>
 					<option value = "3">3:00</option>
@@ -54,16 +55,14 @@
 				</select>
 			</div>
 			<div class = "dual-selector-twohalf">
-				<select class = "dual-selector-select">
+				<select class = "dual-selector-select" name = "mer">
 					<option value = "am">am</option>
 					<option value = "pm">pm</option>
 				</select>
 			</div>
 		</div>
 
-		<div class = "submit-med-form">
-			<p>Create</p>
-		</div>
+		<input class = "submit-med-form input-sub-med" type = "submit" value = "Create">
 	</form>
 </div>
 <div class = "shade-behind-popup">
@@ -72,7 +71,79 @@
 	<div class = "form-nav-header">
 		<img src = "/assets/ui-back-arrow-black.png" class = "form-nav-back-btn" id = "back-to-click2">
 		<p class = "form-nav-title" id = "dynamic-title"></p>
+		<img src = "/assets/ui-edit-icn.png" class = "left-edit-icon">
 	</div>
+	<p class = "upper-left-label">31 Day Adherence:</p>
+	<div id = "flexbox" style = "margin-top: 10px;">
+	</div>
+</div>
+<div class = "popup3" id = "view-item-popup2">
+	<div class = "form-nav-header">
+		<p id = "popup-cancel-button">Cancel</p>
+		<p class = "form-nav-title" id = "dynamic-title2"></p>
+		<!--<p id = "popup-update-button">Update</p>-->
+	</div>
+	<form action = "/medupdate" method = "post">
+		<input type = "hidden" name = "ident" id = "ident">
+		<p class = "large-textinput-label">Medication Name:</p>
+		<input class = "large-textinput center" id = "autocomplete2" type = "text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name = "name">
+
+		<p class = "dual-selector-label">Dose:</p>
+		<div class = "dual-selector">
+			<div class = "dual-selector-onehalf">
+				<input class = "dual-selector-numinput" type = "number" value = "0" name = "dosenum" id = "num-target">
+			</div>
+			<div class = "dual-selector-twohalf">
+				<select class = "dual-selector-select" name = "doseun" id = "unit-target">
+					<option value = "mg">mg</option>
+					<option value = "g">g</option>
+					<option value = "ml">ml</option>
+					<option value = "L">L</option>
+				</select>
+			</div>
+		</div>
+
+		<p class = "schedule-label">Schedule:</p>
+		<div class = "sole-selector-numinput-container">
+			<input class = "sole-selector-numinput" type = "number" value = "0" name = "times" id = "times-target">
+		</div>
+		<p class = "schedule-times-label">Times Per</p>
+		<div class = "sole-selector-select-container">
+			<select class = "sole-selector-select" name = "timeunit" id = "rate-target">
+				<option value = "day">Day</option>
+				<option value = "week">Week</option>
+				<option value = "month">Month</option>
+			</select>
+		</div><br><br><br><br>
+
+		<p class = "dual-selector-label">Notifications:</p>
+		<div class = "dual-selector">
+			<div class = "dual-selector-onehalf">
+				<select class = "dual-selector-select" name = "time" id = "prectimenum-target">
+					<option value = "1">1:00</option>
+					<option value = "2">2:00</option>
+					<option value = "3">3:00</option>
+					<option value = "4">4:00</option>
+					<option value = "5">5:00</option>
+					<option value = "6">6:00</option>
+					<option value = "7">7:00</option>
+					<option value = "8" selected>8:00</option>
+					<option value = "9">9:00</option>
+					<option value = "10">10:00</option>
+					<option value = "11">11:00</option>
+					<option value = "12">12:00</option>
+				</select>
+			</div>
+			<div class = "dual-selector-twohalf">
+				<select class = "dual-selector-select" name = "mer" id = "prectimeun-target">
+					<option value = "am">am</option>
+					<option value = "pm">pm</option>
+				</select>
+			</div>
+		</div>
+
+		<input class = "submit-med-form input-sub-med" type = "submit" value = "Update">
+	</form>
 </div>
 <div class = "shade-behind-popup2">
 </div>
@@ -80,7 +151,7 @@
 <!-- Toolbar -->
 <div class = "ui-toolbar">
 	<a href = "/control/index?isvalid=t" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
-	<p class = "left-toolbar-text" id = "further-right"><%= viewuser.fullname %></p>
+	<p class = "left-toolbar-text" id = "further-right"><%= decrypt(viewuser.fullname) %></p>
 	<div class = "ui-toolbar-adduser" id = "export-btn" style = "right: 121px;"><p>Export As</p></div>
 	<div class = "ui-toolbar-adduser-option" style = "right: 121px;">
 		<div class = "option1"><p>.csv</p></div>
@@ -121,17 +192,19 @@
 			<% cnt = 0 %>
 			<% @medications.each do |med| %>
 				<% cnt += 1 %>
+				<a href = "/medications/delete?ind=<%= encrypt(cnt - 1) %>" class = "med-delete-link">
+					<img src = "/assets/red-delete-icn.png" class = "med-delete-icn" style = "margin-top: <%= (cnt - 1) * 62 + 23 %>px;">
+				</a>
 				<div class = "med-table-cell">
-					<span class = "id-med" style = "display: none;"><%= cnt %></span>
-					<p class = "med-cell-label"><%= med.name %>, <%= med.dose %></p>
-					<img src = "/assets/red-delete-icn.png" class = "med-delete-icn">
+					<span class = "id-med" style = "display: none;"><%= encrypt(cnt) %></span>
+					<p class = "med-cell-label"><%= decrypt(med.name) %>, <%= decrypt(med.dose) %></p>
 					<img src = "/assets/forward-icn.png" class = "viewmed-btn">
 				</div>
 			<% end %>
 		</div>
 		<div id = "med-interaction-field">
 			<div class = "ui-large-btn">
-				<p>Check For Interactions</p>
+				<p class = "button-texter">Check For Interactions</p>
 			</div>
 		</div>
 	</div>
@@ -139,6 +212,11 @@
 <script>
 $(function() {
  $("#autocomplete").autocomplete({
+    source: "/completemedsearch.json"
+ });
+});
+$(function() {
+ $("#autocomplete2").autocomplete({
     source: "/completemedsearch.json"
  });
 });
@@ -158,9 +236,15 @@ $(function() {
 
 	$(".popup").hide();
 	$(".shade-behind-popup").hide();
-	$(".med-delete-icn").hide();
+	//$(".med-delete-icn").hide();
 	$(".popup2").hide();
+	$(".popup3").hide();
 	$(".shade-behind-popup2").hide();
+
+	$("#popup-cancel-button").click(function() {
+		$(".popup2").show();
+		$(".popup3").fadeOut(200);
+	});
 
 	$("#add-med-selector").click(function() {
 		$(".shade-behind-popup").css("pointer-events", "auto");
@@ -168,21 +252,103 @@ $(function() {
 		$(".shade-behind-popup").fadeToggle();
 	});
 
+	$(".left-edit-icon").click(function() {
+		$(".popup3").fadeIn(200, function() { $('.popup2').hide(); });
+	});
+
 	$(".med-table-cell").click(function() {
 		$(".shade-behind-popup2").css("pointer-events", "auto");
-		$(".popup2").fadeToggle();
+
+		$(".popup2").fadeIn();
+		
 		$(".shade-behind-popup2").fadeToggle();
 		$.ajax({
 			method: "GET",
 			url: "/getmedinfoweb?ind="+$(this).find(".id-med").text(),
 			success: function(d) {
-				$("#dynamic-title").text(d.name+", "+d.dose);
+				$("#dynamic-title").text(d[0].name+", "+d[0].dose);
+				$("#dynamic-title2").text("Edit "+d[0].name+", "+d[0].dose);
+				$("#ident").val(d[0].id);
+				$("#autocomplete2").val(d[0].name);
+				$("#num-target").val(d[0].mes);
+				$("#unit-target option").filter(function() {
+    				return $(this).text() == d[0].un;
+				}).prop('selected', true);
+				$("#times-target").val(d[0].ttimes);
+				$("#rate-target option").filter(function() {
+    				return $(this).text() == d[0].trate;
+				}).prop('selected', true);
+				$("#prectimenum-target option").filter(function() {
+    				return $(this).text() == d[0].prectimenum + ":00";
+				}).prop('selected', true);
+				$("#prectimeun-target option").filter(function() {
+    				return $(this).text() == d[0].prectimeun;
+				}).prop('selected', true);
+				$("#flexbox").empty();
+				var prevg;
+				var thisg;
+				var nextg;
+				for(var e = 1; e < 31; e++) {
+					if (e === 1) {
+						prevg = d[1][e];
+						nextg = d[1][e + 1];
+						thisg = d[1][e];
+					} else if (e === 31) {
+						prevg = d[1][e - 1];
+						nextg = d[1][e];
+						thisg = d[1][e];
+					} else {
+						prevg = d[1][e - 1];
+						nextg = d[1][e + 1];
+						thisg = d[1][e];
+					}
+					if (prevg == 0.0 && thisg == 0.0 && nextg == 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/rect11109.png" style = "height: 58px;">');
+					} else if (prevg != 0.0 && thisg == 0.0 && nextg == 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/path11104.png" style = "height: 94px;">');
+					} else if (prevg != 0.0 && thisg != 0.0 && nextg == 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/g11114.png" style = "height: 178px;">');
+					} else if (prevg != 0.0 && thisg == 0.0 && nextg != 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/path11088.png" style = "height: 94px;">');
+					} else if (prevg != 0.0 && thisg != 0.0 && nextg != 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/rect11035.png" style = "height: 178px;">');
+					} else if (prevg == 0.0 && thisg != 0.0 && nextg == 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/path11086.png" style = "height: 178px;">');
+					} else if (prevg == 0.0 && thisg != 0.0 && nextg != 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/g11094.png" style = "height: 178px;">');
+					} else if (prevg == 0.0 && thisg == 0.0 && nextg != 0.0) {
+						$("#flexbox").append('<img class = "sub-percent-block" src = "/assets/path11111.png" style = "height: 94px;">');
+					}
+				}
 			},
 		});
 	});
-
+	var to = 1;
 	$(".ui-delete-icn").click(function() {
-		$(".med-delete-icn").fadeToggle(200);
+		if (to === 1) {
+			$(".med-table-cell").animate({width: "-=60"}, {duration:200, complete:function(){ $(this).css({width: "calc(100% - 80px)"}); } });
+			to = 0;
+		} else {
+			$(".med-table-cell").animate({width: "+=60"}, {duration:200, complete:function(){ $(this).css({width: "calc(100% - 20px)"}); } });
+			to = 1;
+		}
+	});
+
+	$(".med-delete-link").click(function() {
+		return confirm("Are you sure? This action is not reversible.");
+	});
+
+	$(".ui-large-btn").click(function() {
+		$(".button-texter").text("loading");
+		$.ajax({
+			method: "GET",
+			url: "/medications/checkforinteractions",
+			success: function(r) {
+				$("#med-interaction-field").html(r);
+				$("#med-interaction-field").css("height", "auto");
+				$("#med-interaction-field").css("padding-bottom", "15px");
+			},
+		});
 	});
 
 	$(".shade-behind-popup").click(function() {
@@ -193,7 +359,8 @@ $(function() {
 
 	$(".shade-behind-popup2").click(function() {
 		$(".shade-behind-popup2").css("pointer-events", "none");
-		$(".popup2").fadeToggle();
+		$(".popup2").fadeOut();
+		$(".popup3").fadeOut();
 		$(".shade-behind-popup2").fadeToggle();
 	});
 

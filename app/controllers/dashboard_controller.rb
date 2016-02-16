@@ -13,73 +13,79 @@ class DashboardController < ApplicationController
 		b += 1
 	end
 
-	# This calculates @medsfordays
-	Medication.where(:userid => viewuser.id).each do |medication|
-		frequency = medication.schedule
-		timestamp = medication.created_at.localtime
-		int = -1
-		@daystoconsider.times do
-			int += 1
-			datadate = Date.today - int.days
-			createadate = Date.strptime("#{timestamp.month}/#{timestamp.day}/#{timestamp.year}", '%m/%d/%Y')
-			dayssinceadd = datadate - createadate
-			if dayssinceadd % 7 == 0
-				weekly = true
-			else
-				weekly = false
-			end
-
-			if frequency == "daily" && createadate <= datadate
-				@medsfordays[int].push medication.id
-			elsif frequency == "weekly" && createadate <= datadate && weekly == true
-				@medsfordays[int].push medication.id
-			elsif frequency != "daily" && frequency != "weekly" && createadate <= datadate
-				calcfreqone = frequency.split
-				calcfreqtwo = calcfreqone[0].to_i
-				calcfreqthree = calcfreqone[1].split("/")
-				calcfreqfour = calcfreqthree[1]
-				if calcfreqfour == "day" && createadate <= datadate
-					calcfreqtwo.times do
-						@medsfordays[int].push medication.id
-					end
-				end
-				if calcfreqfour == "week" && createadate <= datadate
-					@daystopushweek = []
-					weektimeblock = 7.0 / calcfreqtwo
-					g = 0
-					calcfreqtwo.times do
-						g += 1
-						@daystopushweek.push (weektimeblock * g)
-					end
-					@daystopushweek.map! {|item| item.round}
-					@daystopushweek.each do |numb|
-						if (numb + createadate.strftime("%w").to_i) > 7
-							newnumb = numb + createadate.strftime("%w").to_i - 7
-						else
-							newnumb = numb + createadate.strftime("%w").to_i
-						end
-						if datadate.strftime("%u").to_i == newnumb
-							@medsfordays[int].push medication.id
-						end
-					end
-				end
-				if calcfreqfour == "month" && createadate <= datadate
-					@daystopushmonth = []
-					monthtimeblock = @daysinthismonth.to_f / calcfreqtwo
-					g = 0
-					calcfreqtwo.times do
-						g += 1
-						@daystopushmonth.push (monthtimeblock * g)
-					end
-					@daystopushmonth.map! {|item| item.round}
-					@daystopushmonth.each do |numb|
-						if datadate.day.to_i == numb
-							@medsfordays[int].push medication.id
-						end
-					end
-				end
-			end
+	@usermeds = []
+	Medication.all.each do |medication|
+		if decrypt(medication.userid) == viewuser.id
+			@usermeds.push medication
 		end
+	end
+	# This calculates @medsfordays
+	@usermeds.each do |medication|
+			frequency = decrypt(medication.schedule)
+			timestamp = medication.created_at.localtime
+			int = -1
+			@daystoconsider.times do
+				int += 1
+				datadate = Date.today - int.days
+				createadate = Date.strptime("#{timestamp.month}/#{timestamp.day}/#{timestamp.year}", '%m/%d/%Y')
+				dayssinceadd = datadate - createadate
+				if dayssinceadd % 7 == 0
+					weekly = true
+				else
+					weekly = false
+				end
+
+				if frequency == "daily" && createadate <= datadate
+					@medsfordays[int].push medication.id
+				elsif frequency == "weekly" && createadate <= datadate && weekly == true
+					@medsfordays[int].push medication.id
+				elsif frequency != "daily" && frequency != "weekly" && createadate <= datadate
+					calcfreqone = frequency.split
+					calcfreqtwo = calcfreqone[0].to_i
+					calcfreqthree = calcfreqone[1].split("/")
+					calcfreqfour = calcfreqthree[1]
+					if calcfreqfour == "day" && createadate <= datadate
+						calcfreqtwo.times do
+							@medsfordays[int].push medication.id
+						end
+					end
+					if calcfreqfour == "week" && createadate <= datadate
+						@daystopushweek = []
+						weektimeblock = 7.0 / calcfreqtwo
+						g = 0
+						calcfreqtwo.times do
+							g += 1
+							@daystopushweek.push (weektimeblock * g)
+						end
+						@daystopushweek.map! {|item| item.round}
+						@daystopushweek.each do |numb|
+							if (numb + createadate.strftime("%w").to_i) > 7
+								newnumb = numb + createadate.strftime("%w").to_i - 7
+							else
+								newnumb = numb + createadate.strftime("%w").to_i
+							end
+							if datadate.strftime("%u").to_i == newnumb
+								@medsfordays[int].push medication.id
+							end
+						end
+					end
+					if calcfreqfour == "month" && createadate <= datadate
+						@daystopushmonth = []
+						monthtimeblock = @daysinthismonth.to_f / calcfreqtwo
+						g = 0
+						calcfreqtwo.times do
+							g += 1
+							@daystopushmonth.push (monthtimeblock * g)
+						end
+						@daystopushmonth.map! {|item| item.round}
+						@daystopushmonth.each do |numb|
+							if datadate.day.to_i == numb
+								@medsfordays[int].push medication.id
+							end
+						end
+					end
+				end
+			end
 	end
 
 	# Calculate days where the medication was actually taken
@@ -89,8 +95,7 @@ class DashboardController < ApplicationController
 		@takendays[qd] = []
 		qd += 1
 	end
-	medications = Medication.where(:userid => viewuser.id)
-	medications.each do |medication|
+	@usermeds.each do |medication|
 		medication.datapoints.each do |datapoint|
 			daysago = (Date.today - datapoint[0].to_date).to_i
 			if daysago < @daystoconsider
@@ -132,7 +137,7 @@ class DashboardController < ApplicationController
 
 	# Create data for each individual adherence graph
 	@adherencegraphs = []
-	Medication.where(:userid => viewuser.id).each do |med|
+	@usermeds.each do |med|
 		@adherencegraph = {}
 		qb = 0
 		@daystoconsider.times do
