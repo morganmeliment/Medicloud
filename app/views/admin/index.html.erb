@@ -1,0 +1,28 @@
+<br><br>
+<h1>Admin Console</h1><br><br>
+<p>Total Users: <%= @usercount %></p><br>
+<p>Total Organizations: <%= @orgcount %></p><br>
+
+<p>Create Organization:</p>
+<form action = "/admin/createorganization" method = "post">
+	<input type = "text" name = "orgname" placeholder="Organization Name">
+	<input type = "text" name = "orgid" placeholder="Organization Id">
+	<input type = "submit">
+</form>
+
+<p>Create You:</p>
+<a href = "/admin/createfirstuser?o=good412"><b>Create</b></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

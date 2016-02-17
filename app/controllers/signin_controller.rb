@@ -17,8 +17,10 @@ class SigninController < ApplicationController
   		end
   	end
   	if found == false
+      flash[:notice] = "Incorrect Login."
   		redirect_to root_path
   	else
+      flash[:notice] = "Signed in successfully!"
   		redirect_to control_index_path
   	end
   end
@@ -41,8 +43,10 @@ class SigninController < ApplicationController
     end
     if found == false
       redirect_to root_path
+      flash[:notice] = "Registration not found."
     else
       redirect_to control_index_path
+      flash[:notice] = "Registration was successful!"
     end
   end
 end

@@ -62,7 +62,7 @@
 	<% else %>
 		<% f = 0 %>
 		<% User.all.each do |user| %>
-			<% if decrypt(user.organization) == decrypt(current_user.organization) %>
+			<% if decrypt(user.organization) == decrypt(current_user.organization) && user.active && decrypt(user.role) == "patient" %>
 			<% f += 1 %>
 			<a href = "/control/setviewuser?viewuser=<%= encrypt(user.id) %>"><div class = "testingthefloat3" <% if f == 1 %>id = "firstmarginonnotesindex"<% end %>>
 				<% if user.id == current_user.id %>

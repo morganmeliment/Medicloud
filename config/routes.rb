@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   post '/addnote', to: 'notes#create'
   post '/noteupdate', to: 'notes#update'
   get 'homepage/signout'
+  get '/controlpanel', to: 'admin#index'
+
+  get 'admin/createfirstuser'
+  post 'admin/createorganization', to: 'admin#createorganization'
 
   get 'control/generatesignup'
 

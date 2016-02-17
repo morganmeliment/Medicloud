@@ -204,7 +204,23 @@
 	background-color: white;
 	font-size: 14px;
 }
-
+.notice {
+	padding: 10px 20px 10px 20px;
+	position: fixed;
+	top: 20px;
+	border-radius: 5px;
+	left: 50%;
+	background-color: #69e0a1;
+	font-family: 'Montserrat';
+	color: white;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	font-size: 16px;
+	font-weight: lighter;
+	-webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    z-index: 800;
+}
 
 
 
