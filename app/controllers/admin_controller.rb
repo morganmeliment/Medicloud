@@ -35,6 +35,6 @@ class AdminController < ApplicationController
 			u = User.new(:firstname => encrypt("Morgan"), :lastname => encrypt("Meliment"), :active => true, :fullname => encrypt("Morgan Meliment"), :role => encrypt("superadmin"), :password => "uncle6307")
 			u.save
 		end
-		redirect_to "http://localhost:3000/controlpanel?auth=MorganMeliment"
+		redirect_to "/controlpanel?auth=MorganMeliment"
 	end
 end
