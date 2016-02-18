@@ -469,6 +469,23 @@ def checkforinteractions
 
 end
 
+def remotesignin
+    user = []
+    uid = 0
+  	User.all.each do |us|
+      user.push us unless decrypt(us.fullname) != params[:username]
+    end
+  	user.each do |u|
+  		if u.authenticate(params[:password])
+  			uid = u.id
+  		end
+  	end
+    render :json => uid
+end
+	
+def remoteregistration
+end
+
 #class end
 end
 
