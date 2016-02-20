@@ -477,7 +477,7 @@ def remotesignin
     end
   	user.each do |u|
   		if u.authenticate(params[:password])
-  			uid = u.auth_token
+  			uid = u.id
   		end
   	end
     render :json => uid
