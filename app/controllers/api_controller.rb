@@ -477,10 +477,14 @@ def remotesignin
     end
   	user.each do |u|
   		if u.authenticate(params[:password])
-  			uid = u.auth_token.to_s
+  			uid = u.id
   		end
   	end
-    render :json => uid
+  	if uid == 0
+  		render :json => User.find(uid).auth_token
+  	else
+  		render :json => 0
+  	end
 end
 	
 def remoteregistration
