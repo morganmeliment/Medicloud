@@ -480,7 +480,7 @@ def remotesignin
   			uid = u.id
   		end
   	end
-  	if uid == 0
+  	if uid != 0
   		render :json => User.find(uid).auth_token
   	else
   		render :json => 0
