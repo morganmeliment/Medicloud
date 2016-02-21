@@ -206,16 +206,18 @@ def takemedicationapi
 end
 
 def generatemeds
-	userident = 1
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	finalhtml = ""
-	Medication.where(:userid => userident).each do |medication|
-		finalhtml = finalhtml + "<div class = 'medicationbox mbox'>
-			<span class = 'idtag' style = 'display: none;'>"+"#{medication.id}"+"</span>
-            <p id = 'medtitlename'><span class = 'medactname'>#{medication.name}</span>, #{medication.dose}</p>
-            <p id = 'medlasttaken'>Last Taken: YY:YYam</p>
-            <p id = 'pillsreminderlabel'>x pills left</p>
-            <img src = 'img/fwd_arrow.png' id = 'forwardmedarrow' style = 'margin-top: 18px;'>
-        </div>"
+	Medication.all.each do |medication|
+		if decrypt(medication.userid) == userident
+			finalhtml = finalhtml + "<div class = 'medicationbox mbox'>
+				<span class = 'idtag' style = 'display: none;'>"+"#{medication.id}"+"</span>
+        	    <p id = 'medtitlename'><span class = 'medactname'>#{medication.name}</span>, #{medication.dose}</p>
+        	    <p id = 'medlasttaken'>Last Taken: YY:YYam</p>
+        	    <p id = 'pillsreminderlabel'>x pills left</p>
+        	    <img src = 'img/fwd_arrow.png' id = 'forwardmedarrow' style = 'margin-top: 18px;'>
+        	</div>"
+    	end
 	end
 	render :html => finalhtml.html_safe
 end
