@@ -98,9 +98,9 @@ end
 
 def generatetimeline
 	#use a parameter to get user id in the future
-	@userident = 1
+	@userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 
-	@schedule = generateSchedule(@userident, 8)
+	@schedule = generateSchedule(encrypt(@userident), 8)
 	@timeline = {}
 
 	@theuser = User.find(@userident)
