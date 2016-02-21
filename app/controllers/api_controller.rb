@@ -212,9 +212,8 @@ def generatemeds
 		if decrypt(medication.userid) == userident
 			finalhtml = finalhtml + "<div class = 'medicationbox mbox'>
 				<span class = 'idtag' style = 'display: none;'>"+"#{medication.id}"+"</span>
-        	    <p id = 'medtitlename'><span class = 'medactname'>#{medication.name}</span>, #{medication.dose}</p>
+        	    <p id = 'medtitlename'><span class = 'medactname'>#{decrypt(medication.name)}</span>, #{decrypt(medication.dose)}</p>
         	    <p id = 'medlasttaken'>Last Taken: YY:YYam</p>
-        	    <p id = 'pillsreminderlabel'>x pills left</p>
         	    <img src = 'img/fwd_arrow.png' id = 'forwardmedarrow' style = 'margin-top: 18px;'>
         	</div>"
     	end
