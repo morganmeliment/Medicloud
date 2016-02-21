@@ -326,12 +326,16 @@ def createthedb
 end
 
 def createmedication
-	if params[:toggle] == "on"
-		@med = Medication.new(:userid => 1, :name => params[:medname], :schedule => "#{params[:times]} times/#{params[:timeunit]}", :dose => "#{params[:dosenum]}#{params[:doseun]}", :notification_time => "#{params[:taketime]}")
-	else
-		@med = Medication.new(:userid => 1, :name => params[:medname], :schedule => "daily", :dose => "#{params[:dosenum]}#{params[:doseun]}")
+	@result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:medname].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	if @result
+		if params[:toggle] == "on"
+			@med = Medication.new(:userid => encrypt(userident), :name => encrypt(params[:medname]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:taketime]}"), :interaction_id => encrypt(@result.first))
+		else
+			@med = Medication.new(:userid => encrypt(userident), :name => encrypt(params[:medname]), :schedule => encrypt("0 times/day"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :interaction_id => encrypt(@result.first))
+		end
+		@med.save
 	end
-	@med.save
 	render :text => "success"
 end
 
