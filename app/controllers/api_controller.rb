@@ -477,7 +477,7 @@ def remotesignin
     end
   	user.each do |u|
   		if u.authenticate(params[:password])
-  			uid = u.auth_token unless u.auth_token.nil?
+  			uid = u
   		end
   	end
   	if uid != 0
