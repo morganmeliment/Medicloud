@@ -376,8 +376,9 @@ def getmedinfoweb
 				dun.gsub!(rep, "")
 			end
 			dmes = decrypt(med.dose).gsub(dun, "")
-			nottime = decrypt(med.notification_time).split(" ")
-			dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize, :prectimenum => nottime[0], :prectimeun => nottime[1]}                      
+			#nottime = decrypt(med.notification_time).split(" ")
+			#, :prectimenum => nottime[0], :prectimeun => nottime[1]
+			dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize}                      
 
 			@medsforday = generateSchedule(med.userid, 31)
 
