@@ -93,7 +93,7 @@ def generateSchedule(usid, days)
 end
 
 def getusername
-	render :text => User.find(params[:io]).firstname
+	render :text => decrypt(User.find(params[:io]).firstname)
 end
 
 def generatetimeline
