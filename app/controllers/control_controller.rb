@@ -28,6 +28,7 @@ def index
 	#end
 	#session[:current_user] = 5
 	#session[:org] = current_org.selfid
+
 	if params[:search].present?
     	@users = []
     	User.all.each do |u|

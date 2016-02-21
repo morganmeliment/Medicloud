@@ -477,13 +477,15 @@ def remotesignin
     end
   	user.each do |u|
   		if u.authenticate(params[:password])
-  			uid = u.id
+  			if !u.auth_token.nil?
+  				uid = u.auth_token
+  			end
   		end
   	end
   	if uid != 0
-  		render :json => User.where(:id => uid).pluck(:auth_token).first()
+  		render :json => uid
   	else
-  		render :json => 0
+  		render :json => 2
   	end
 end
 	
