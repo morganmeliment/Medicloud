@@ -370,8 +370,7 @@ end
 
 def getmedinfoweb
 	medications = []
-	Medication.all.each do |med|
-		if decrypt(med.userid) == viewuser.id
+		Medication.where(:id => decrypt(params[:ind])).each do |med|
 			dun = decrypt(med.dose)
 			["mg", "g", "ml", "L"].each do |rep| 
 				dun.gsub!(rep, "")
@@ -435,8 +434,7 @@ def getmedinfoweb
 
 			medications.push [dem, @adherencegraph]
 		end
-	end
-	render :json => medications[decrypt(params[:ind]).to_i - 1]
+	render :json => medications[0]
 end
 
 def getnoteinfoweb

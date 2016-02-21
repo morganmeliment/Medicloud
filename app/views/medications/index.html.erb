@@ -196,7 +196,7 @@
 					<img src = "/assets/red-delete-icn.png" class = "med-delete-icn" style = "margin-top: <%= (cnt - 1) * 62 + 23 %>px;">
 				</a>
 				<div class = "med-table-cell">
-					<span class = "id-med" style = "display: none;"><%= encrypt(cnt) %></span>
+					<span class = "id-med" style = "display: none;"><%= encrypt(med.id) %></span>
 					<p class = "med-cell-label"><%= decrypt(med.name) %>, <%= decrypt(med.dose) %></p>
 					<img src = "/assets/forward-icn.png" class = "viewmed-btn">
 				</div>
