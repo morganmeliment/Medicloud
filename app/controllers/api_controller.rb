@@ -25,7 +25,7 @@ def generateSchedule(usid, days)
 		frequency = decrypt(medication.schedule)
 		timestamp = medication.created_at.localtime
 		int = @daystoconsider + 1
-		@daystoconsider.times do
+		(@daystoconsider).times do
 			int -= 1
 			datadate = Date.today + (int - 2).days
 			createadate = Date.strptime("#{timestamp.month}/#{timestamp.day}/#{timestamp.year}", '%m/%d/%Y')
@@ -380,16 +380,17 @@ def getmedinfoweb
 			#, :prectimenum => nottime[0], :prectimeun => nottime[1]
 			dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize}                      
 
-			@medsforday = generateSchedule(med.userid, 31)
+			@medsforday = generateSchedule(med.userid, 30)
 
 			@takendays = {}
-			qd = 1
+			qd = 0
 			31.times do
 				@takendays[qd] = []
 				qd += 1
 			end
 			med.datapoints.each do |datapoint|
 				daysago = (Date.today - datapoint[0].to_date).to_i
+				puts daysago
 				if daysago < 31
 					if datapoint[1] == "true"
 						@takendays[daysago].push med.id
@@ -399,7 +400,7 @@ def getmedinfoweb
 
 			@adherencegraph = {}
 			qb = 1
-			31.times do
+			30.times do
 				@adherencegraph[qb] = 0.0
 				qb += 1
 			end
@@ -413,7 +414,7 @@ def getmedinfoweb
 			end
 
 			medspecifarry = {}
-			qt = 1
+			qt = 0
 			31.times do
 				medspecifarry[qt] = 0
 				qt += 1
@@ -433,9 +434,10 @@ def getmedinfoweb
 				end
 			end
 
-			medications.push [dem, @adherencegraph]
+			medications = [dem, @adherencegraph]
+			
 		end
-	render :json => medications[0]
+	render :json => medications
 end
 
 def getnoteinfoweb
