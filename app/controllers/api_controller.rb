@@ -433,7 +433,7 @@ def getmedinfoweb
 				end
 			end
 			puts @adherencegraph, @takendays
-			medications = [dem, @adherencegraph]
+			medications = [dem, @adherencegraph, @medsforday, @adherencegraph, @takendays]
 			
 		end
 	render :json => medications
