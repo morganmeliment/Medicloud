@@ -384,7 +384,7 @@ def getmedinfoweb
 
 			@takendays = {}
 			qd = 0
-			31.times do
+			30.times do
 				@takendays[qd] = []
 				qd += 1
 			end
@@ -414,15 +414,15 @@ def getmedinfoweb
 			end
 
 			medspecifarry = {}
-			qt = 0
-			31.times do
+			qt = 1
+			30.times do
 				medspecifarry[qt] = 0
 				qt += 1
 			end
 			@takendays.each do |day, idarr|
 				idarr.each do |id|
 					if id == med.id
-						medspecifarry[day] += 1
+						medspecifarry[day + 1] += 1
 					end
 				end
 			end
@@ -433,7 +433,7 @@ def getmedinfoweb
 					@adherencegraph[day] = 0.0
 				end
 			end
-
+			puts @adherencegraph, @takendays
 			medications = [dem, @adherencegraph]
 			
 		end
