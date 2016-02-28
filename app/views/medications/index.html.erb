@@ -151,7 +151,7 @@
 <!-- Toolbar -->
 <div class = "ui-toolbar">
 	<a href = "/control/index?isvalid=t" class = "right-logo"><img src = "/assets/logo-portal-icn"></a>
-	<p class = "left-toolbar-text" id = "further-right"><%= decrypt(viewuser.fullname) %><%= Date.today %></p>
+	<p class = "left-toolbar-text" id = "further-right"><%= decrypt(viewuser.fullname) %></p>
 	<div class = "ui-toolbar-adduser" id = "export-btn" style = "right: 121px;"><p>Export As</p></div>
 	<div class = "ui-toolbar-adduser-option" style = "right: 121px;">
 		<div class = "option1"><p>.csv</p></div>
@@ -197,7 +197,7 @@
 				</a>
 				<div class = "med-table-cell">
 					<span class = "id-med" style = "display: none;"><%= encrypt(med.id) %></span>
-					<p class = "med-cell-label"><%= decrypt(med.name) %>, <%= decrypt(med.dose) %><%= med.created_at.localtime %></p>
+					<p class = "med-cell-label"><%= decrypt(med.name) %>, <%= decrypt(med.dose) %></p>
 					<img src = "/assets/forward-icn.png" class = "viewmed-btn">
 				</div>
 			<% end %>
@@ -288,13 +288,12 @@ $(function() {
 				var prevg;
 				var thisg;
 				var nextg;
-				console.log(d);
-				for(var e = 1; e < 31; e++) {
+				for(var e = 1; e < 32; e++) {
 					if (e === 1) {
 						prevg = d[1][e];
 						nextg = d[1][e + 1];
 						thisg = d[1][e];
-					} else if (e === 30) {
+					} else if (e === 31) {
 						prevg = d[1][e - 1];
 						nextg = d[1][e];
 						thisg = d[1][e];

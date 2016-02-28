@@ -30,6 +30,7 @@ def generateSchedule(usid, days)
 			datadate = Date.today + (int - 2).days
 			createadate = Date.strptime("#{timestamp.month}/#{timestamp.day}/#{timestamp.year}", '%m/%d/%Y')
 			dayssinceadd = datadate - createadate
+
 			if dayssinceadd % 7 == 0
 				weekly = true
 			else
@@ -89,6 +90,96 @@ def generateSchedule(usid, days)
 		end
 	end
 
+	return @medsfordays
+end
+
+def generate(usid, days)
+	# Set @daystoconsider to the amount of days you want to include
+  	@daystoconsider = days.to_i
+
+  	# @medsfordays will be the days that the medication is supposed to be taken, 100% adherence
+	@medsfordays = {}
+
+	b = 0
+	@daystoconsider.times do
+		@medsfordays[b] = []
+		b += 1
+	end
+
+	@usermeds = []
+	Medication.all.each do |medication|
+		if decrypt(medication.userid) == usid
+			@usermeds.push medication
+		end
+	end
+	# This calculates @medsfordays
+	@usermeds.each do |medication|
+			frequency = decrypt(medication.schedule)
+			timestamp = medication.created_at.localtime
+			int = -1
+			@daystoconsider.times do
+				int += 1
+				datadate = Date.today - int.days
+				createadate = Date.strptime("#{timestamp.month}/#{timestamp.day}/#{timestamp.year}", '%m/%d/%Y')
+				dayssinceadd = datadate - createadate
+				if dayssinceadd % 7 == 0
+					weekly = true
+				else
+					weekly = false
+				end
+
+				if frequency == "daily" && createadate <= datadate
+					@medsfordays[int].push medication.id
+				elsif frequency == "weekly" && createadate <= datadate && weekly == true
+					@medsfordays[int].push medication.id
+				elsif frequency != "daily" && frequency != "weekly" && createadate <= datadate
+					calcfreqone = frequency.split
+					calcfreqtwo = calcfreqone[0].to_i
+					calcfreqthree = calcfreqone[1].split("/")
+					calcfreqfour = calcfreqthree[1]
+					if calcfreqfour == "day" && createadate <= datadate
+						calcfreqtwo.times do
+							@medsfordays[int].push medication.id
+						end
+					end
+					if calcfreqfour == "week" && createadate <= datadate
+						@daystopushweek = []
+						weektimeblock = 7.0 / calcfreqtwo
+						g = 0
+						calcfreqtwo.times do
+							g += 1
+							@daystopushweek.push (weektimeblock * g)
+						end
+						@daystopushweek.map! {|item| item.round}
+						@daystopushweek.each do |numb|
+							if (numb + createadate.strftime("%w").to_i) > 7
+								newnumb = numb + createadate.strftime("%w").to_i - 7
+							else
+								newnumb = numb + createadate.strftime("%w").to_i
+							end
+							if datadate.strftime("%u").to_i == newnumb
+								@medsfordays[int].push medication.id
+							end
+						end
+					end
+					if calcfreqfour == "month" && createadate <= datadate
+						@daystopushmonth = []
+						monthtimeblock = @daysinthismonth.to_f / calcfreqtwo
+						g = 0
+						calcfreqtwo.times do
+							g += 1
+							@daystopushmonth.push (monthtimeblock * g)
+						end
+						@daystopushmonth.map! {|item| item.round}
+						@daystopushmonth.each do |numb|
+							if datadate.day.to_i == numb
+								@medsfordays[int].push medication.id
+							end
+						end
+					end
+				end
+			end
+	end
 	return @medsfordays
 end
 
@@ -380,11 +471,11 @@ def getmedinfoweb
 			#, :prectimenum => nottime[0], :prectimeun => nottime[1]
 			dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize}                      
 
-			@medsforday = generateSchedule(med.userid, 30)
-
+			@medsforday = generate(decrypt(med.userid), 31)
+			
 			@takendays = {}
 			qd = 0
-			30.times do
+			31.times do
 				@takendays[qd] = []
 				qd += 1
 			end
@@ -399,7 +490,7 @@ def getmedinfoweb
 
 			@adherencegraph = {}
 			qb = 1
-			30.times do
+			31.times do
 				@adherencegraph[qb] = 0.0
 				qb += 1
 			end
@@ -407,14 +498,14 @@ def getmedinfoweb
 			@medsforday.each do |day, idarr|
 				idarr.each do |id|
 					if id == med.id
-						@adherencegraph[day] += 1
+						@adherencegraph[day + 1] += 1
 					end
 				end
 			end
 
 			medspecifarry = {}
 			qt = 1
-			30.times do
+			31.times do
 				medspecifarry[qt] = 0
 				qt += 1
 			end
@@ -432,8 +523,8 @@ def getmedinfoweb
 					@adherencegraph[day] = 0.0
 				end
 			end
-			puts @adherencegraph, @takendays
-			medications = [dem, @adherencegraph, @medsforday, @adherencegraph, @takendays]
+			
+			medications = [dem, @adherencegraph]
 			
 		end
 	render :json => medications
