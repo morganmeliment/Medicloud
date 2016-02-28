@@ -197,7 +197,7 @@
 				</a>
 				<div class = "med-table-cell">
 					<span class = "id-med" style = "display: none;"><%= encrypt(med.id) %></span>
-					<p class = "med-cell-label"><%= decrypt(med.name) %>, <%= decrypt(med.dose) %></p>
+					<p class = "med-cell-label"><%= decrypt(med.name) %>, <%= decrypt(med.dose) %><%= med.created_at.localtime %></p>
 					<img src = "/assets/forward-icn.png" class = "viewmed-btn">
 				</div>
 			<% end %>
