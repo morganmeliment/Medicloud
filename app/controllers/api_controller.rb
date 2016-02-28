@@ -390,7 +390,6 @@ def getmedinfoweb
 			end
 			med.datapoints.each do |datapoint|
 				daysago = (Date.today - datapoint[0].to_date).to_i
-				puts daysago
 				if daysago < 31
 					if datapoint[1] == "true"
 						@takendays[daysago].push med.id
