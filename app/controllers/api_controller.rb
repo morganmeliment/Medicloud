@@ -313,18 +313,20 @@ def generatemeds
 end
 
 def generatenotes
-	userident = 1
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	finalhtml = ""
 	d = 0
-	Note.where(:userid => userident).each do |note|
-		d += 1
-		finalhtml = finalhtml + "<div class = 'medicationbox notebox'>
-			<span class = 'noteidtag' style = 'display: none;'>"+"#{note.id}"+"</span>
-			<p id = 'medtitlename'><span class = 'medactname'>#{note.name}</span></p>
-			<p id = 'medlasttaken'>Created: #{note.created_at.to_time.strftime('%x')}</p>
-			<p id = 'pillsreminderlabel'>#{note.notecontent[0...15]}...</p>
-			<img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
-		</div>"
+	Note.all.each do |note|
+		if decrypt(note.userid) == userident
+			d += 1
+			finalhtml = finalhtml + "<div class = 'medicationbox notebox'>
+				<span class = 'noteidtag' style = 'display: none;'>"+"#{encrypt(note.id)}"+"</span>
+				<p id = 'medtitlename'><span class = 'medactname'>#{decrypt(note.name)}</span></p>
+				<p id = 'medlasttaken'>Created: #{note.created_at.to_time.strftime('%x')}</p>
+				<p id = 'pillsreminderlabel'>#{decrypt(note.notecontent[0...15])}...</p>
+				<img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
+			</div>"
+		end
 	end
 	(20 - (d * 0.66).ceil).times do
 		finalhtml = finalhtml + "<div class = 'horizontalline'></div>"
@@ -431,13 +433,20 @@ def createmedication
 end
 
 def createnote
-	@note = Note.new(:userid => 1, :name => params[:notename], :notecontent => params[:notecontent])
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	@note = Note.new(:userid => encrypt(userident), :name => encrypt(params[:notename]), :notecontent => encrypt(params[:notecontent]))
 	@note.save
 	render :text => "success"
 end
 
 def getnotei
-	render :text => Note.find(params[:d]).notecontent
+	note = Note.find(decrypt(params[:d]))
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	if decrypt(note.userid) == userident
+		render :text => decrypt(note.notecontent)
+	else
+		render :text => "invalid"
+	end
 end
 
 def deletemedapi
