@@ -323,7 +323,7 @@ def generatenotes
 				<span class = 'noteidtag' style = 'display: none;'>"+"#{encrypt(note.id)}"+"</span>
 				<p id = 'medtitlename'><span class = 'medactname'>#{decrypt(note.name)}</span></p>
 				<p id = 'medlasttaken'>Created: #{note.created_at.to_time.strftime('%x')}</p>
-				<p id = 'pillsreminderlabel'>#{decrypt(note.notecontent[0...15])}...</p>
+				<p id = 'pillsreminderlabel'>#{decrypt(note.notecontent)[0...15]}...</p>
 				<img src = 'img/fwd_arrow.png' id = 'forwardmedarrow'>
 			</div>"
 		end
