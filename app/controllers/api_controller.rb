@@ -458,7 +458,7 @@ end
 
 def deletenoteapi
 	if params[:note].present?
-		Note.destroy(params[:note])
+		Note.destroy(decrypt(params[:note]))
 		render :text => ""
 	end
 end
