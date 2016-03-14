@@ -41,6 +41,8 @@ def index
     		end
     	end
     end
+
+    User.medifications
 =begin		
  	end
  	?org=#{current_org.name.split(' ').join('_')}&name=#{params[:first].capitalize}_#{params[:last].capitalize}&code=#{@code}

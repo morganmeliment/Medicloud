@@ -11,7 +11,7 @@ gem 'pg'
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
 #For timing notifications
-gem 'whenever'
+gem 'whenever', :require => false
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
