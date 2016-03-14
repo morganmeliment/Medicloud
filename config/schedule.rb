@@ -8,7 +8,7 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 
-every 1.day, :at => '4:25 pm' do
+every 1.day, :at => '4:31 pm' do
   runner "User.medifications"
 end
 
