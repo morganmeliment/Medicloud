@@ -423,8 +423,12 @@ def createmedication
 	@result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:medname].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	if @result
+		mer = "am"
+		if params[:taketime].to_s.split(':')[0].to_i >= 12
+			mer = "pm"
+		end
 		if params[:toggle] == "on"
-			@med = Medication.new(:userid => encrypt(userident), :name => encrypt(params[:medname]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:taketime].to_s.split(':')[0]} #{params[:taketime].to_s.split(' ')[1].downcase}"), :interaction_id => encrypt(@result.first))
+			@med = Medication.new(:userid => encrypt(userident), :name => encrypt(params[:medname]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:taketime].to_s.split(':')[0].to_i % 12} #{mer}"), :interaction_id => encrypt(@result.first))
 		else
 			@med = Medication.new(:userid => encrypt(userident), :name => encrypt(params[:medname]), :schedule => encrypt("0 times/day"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :interaction_id => encrypt(@result.first))
 		end
