@@ -276,14 +276,7 @@ def generatetimeline
 		end
 		@fullhtml = @fullhtml + dateblock + "</div>"
 	end
-	final = "<div id = 'timelinecontainer'>
-	<div id = 'content_width' style = 'height: 102%;'>
-	<div id = 'size'>
-	" + @fullhtml + '<br><br>' + "</div>
-	</div>
-</div>
-<div id = 'indent-line'></div>
-</div>" + "
+	final = @fullhtml + '<br><br>' + "<div id = 'indent-line'></div>" + "
 	<style>
 	* {
     margin: 0px;
@@ -310,6 +303,7 @@ p {
     margin-top: 10px;
     position: relative;
     display: inline-block;
+    margin-bottom: 4px;
     z-index: 2;
 }
 .red {
@@ -330,7 +324,6 @@ p {
     width: calc(100% - 25px);
     height: 25px;
     position: relative;
-    padding-top: 4px;
     left: 25px;
     top: 6px;
 }
