@@ -375,6 +375,7 @@ p {
     background-color: #ececec;
     left: 25px;
     top: 0px;
+    z-index: -1;
 }
 	</style>
 
