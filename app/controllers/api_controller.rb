@@ -290,6 +290,9 @@ def generatetimeline
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-appearance: none;
 }
+*::-webkit-scrollbar { 
+    display: none;
+}
 p {
     -webkit-font-smoothing: antialiased;
     font-family: -apple-system;
@@ -378,6 +381,28 @@ p {
     z-index: -1;
 }
 	</style>
+	<script>
+	function refreshtimeline() {
+		$.ajax({
+			method: 'GET',
+			url: 'http://medicloud.io/timelineapi?auth=c67f85179fa1475ebd505cc3b88ecc98',
+			success: function(data) {
+				$('body').html(data);
+			},
+		});
+	}
+
+	$('.medtakeblock div').on('click', function() {
+			str = $(this).find('.takeinfo').text();
+			$.ajax({
+				method: 'GET',
+				url: 'http://medicloud.io/takemedicationapi?i='+str,
+				success: function() {
+					refreshtimeline();
+				},
+			});
+		});
+	</script>
 
 	"
 	render :html => final.html_safe
