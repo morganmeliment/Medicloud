@@ -380,7 +380,12 @@ p {
     top: 0px;
     z-index: -1;
 }
+.greenbutton {
+    border: 1px solid #4ed964 !important;
+    color: #3ab64d;
+}
 	</style>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js'></script>
 	<script>
 	function refreshtimeline() {
 		$.ajax({
@@ -392,7 +397,7 @@ p {
 		});
 	}
 
-	$('.medtakeblock div').on('click', function() {
+	$('.medtakeblock div').click(function() {
 			str = $(this).find('.takeinfo').text();
 			$.ajax({
 				method: 'GET',
