@@ -304,7 +304,7 @@ p {
     position: relative;
     display: inline-block;
     margin-bottom: 4px;
-    z-index: 2;
+    z-index: 4;
 }
 .red {
     background-color: red;
