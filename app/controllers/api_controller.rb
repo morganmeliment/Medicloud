@@ -276,7 +276,89 @@ def generatetimeline
 		end
 		@fullhtml = @fullhtml + dateblock + "</div>"
 	end
-	final = @fullhtml + '<br><br>'
+	final = @fullhtml + '<br><br>' + "
+	<style>
+	* {
+    margin: 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-appearance: none;
+}
+p {
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system;
+    font-weight: 300;
+}
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 6px;
+    margin-left: 20px;
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+}
+.red {
+    background-color: red;
+}
+.dateblock {
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+}
+#datetitle {
+    display: inline-block;
+    margin: 4px 0 0 15px;
+    position: absolute;
+    font-size: 18px;
+}
+.medtakeblock {
+    width: calc(100% - 25px);
+    height: 25px;
+    position: relative;
+    left: 25px;
+    top: 6px;
+}
+.green {
+    background-color: green;
+}
+.medname {
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    margin-left: 23px;
+    margin-top: 5px;
+    font-weight: 100;
+}
+.medtakeblock div {
+    width: 50px;
+    height: 17px;
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    position: relative;
+    left: calc(100% - 70px);
+    margin-top: -18px;
+    cursor: pointer;
+}
+.medtakeblock div p {
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 1px;
+}
+.blue {
+    background-color: #35a1bb;
+}
+	</style>
+
+	"
 	render :html => final.html_safe
 end
 
