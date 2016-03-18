@@ -391,6 +391,7 @@ p {
 	$(function() {
     	FastClick.attach(document.body);
 	});
+	$('<style></style>').appendTo($(document.body)).remove();
 	$('.medtakeblock').on('click', 'div', function(){
 			var str = $(this).find('.takeinfo').text();
 			var thing = $(this);
