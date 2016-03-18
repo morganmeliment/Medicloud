@@ -392,8 +392,8 @@ p {
     	FastClick.attach(document.body);
 	});
 	$('.datetitle').hide();
-	$('.datetitle').offset();
 	$('.datetitle').show();
+	$('.datetitle').css('display', 'inline-block');
 	$('.medtakeblock').on('click', 'div', function(){
 			var str = $(this).find('.takeinfo').text();
 			var thing = $(this);
