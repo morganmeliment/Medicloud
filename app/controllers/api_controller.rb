@@ -398,18 +398,21 @@ p {
 	}
 
 	$('.medtakeblock div').click(function() {
-			str = $(this).find('.takeinfo').text();
+			var str = $(this).find('.takeinfo').text();
+			var thing = $(this);
 			$.ajax({
 				method: 'GET',
 				url: 'http://medicloud.io/takemedicationapi?i='+str,
 				success: function(data) {
 					if (data == 'green') {
-						console.log($('#test').attr('class'));
+						console.log($(this).attr('class'));
+						console.log(thing.attr('class'));
 						//$(this).after(\"<div class = 'greenbutton'><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p class = 'whitetext'>Taken</p></div>\");
 						//$(this).remove();
 						console.log(data);
 					} else {
-						console.log($('#test').attr('class'));
+						console.log($(this).attr('class'));
+						console.log(thing.attr('class'));
 						//$(this).after(\"<div><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p>Take</p></div>\");
 						//$(this).remove();
 						console.log(data);
