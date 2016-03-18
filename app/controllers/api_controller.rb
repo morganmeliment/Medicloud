@@ -242,7 +242,7 @@ def generatetimeline
 		dateblock = "
 		<div class = 'dateblock'>
         <div class = '" + dotcolor + "'></div>
-        <p id = 'datetitle'>#{day[0]}</p>
+        <p class = 'datetitle'>#{day[0]}</p>
 		"
 		for k in day[1]
 			if i < 3
@@ -317,7 +317,7 @@ p {
     margin-top: 20px;
     position: relative;
 }
-#datetitle {
+.datetitle {
     display: inline-block;
     margin: 4px 0 0 15px;
     position: absolute;
@@ -391,7 +391,9 @@ p {
 	$(function() {
     	FastClick.attach(document.body);
 	});
-	$('<style></style>').appendTo($(document.body)).remove();
+	$('.datetitle').hide();
+	$('.datetitle').offset();
+	$('.datetitle').show();
 	$('.medtakeblock').on('click', 'div', function(){
 			var str = $(this).find('.takeinfo').text();
 			var thing = $(this);
