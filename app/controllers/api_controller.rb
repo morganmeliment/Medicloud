@@ -404,12 +404,14 @@ p {
 				url: 'http://medicloud.io/takemedicationapi?i='+str,
 				success: function(data) {
 					if (data == 'green') {
-						$(this).after(\"<div class = 'greenbutton'><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p class = 'whitetext'>Taken</p></div>\");
-						$(this).remove();
+						console.log($('#test').attr('class'));
+						//$(this).after(\"<div class = 'greenbutton'><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p class = 'whitetext'>Taken</p></div>\");
+						//$(this).remove();
 						console.log(data);
 					} else {
-						$(this).after(\"<div><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p>Take</p></div>\");
-						$(this).remove();
+						console.log($('#test').attr('class'));
+						//$(this).after(\"<div><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p>Take</p></div>\");
+						//$(this).remove();
 						console.log(data);
 					}
 				},
