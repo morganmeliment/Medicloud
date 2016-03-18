@@ -320,9 +320,7 @@ p {
 .datetitle {
     display: inline-block;
     margin: 4px 0 0 15px;
-    position: absolute;
     font-size: 18px;
-    transform: translateZ(0);
 }
 .medtakeblock {
     width: calc(100% - 25px);
@@ -392,6 +390,7 @@ p {
 	$(function() {
     	FastClick.attach(document.body);
 	});
+	$('.datetitle').css('position', 'absolute');
 	$('.medtakeblock').on('click', 'div', function(){
 			var str = $(this).find('.takeinfo').text();
 			var thing = $(this);
