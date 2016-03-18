@@ -403,6 +403,7 @@ p {
 				method: 'GET',
 				url: 'http://medicloud.io/takemedicationapi?i='+str,
 				success: function(data) {
+					console.log(data);
 					if (data == 'green') {
 						$(this).parent().append(\"<div class = 'greenbutton'><span class = 'takeinfo' style = 'display: none;'>\"+ str +\"</span><p class = 'whitetext'>Taken</p></div>\");
 						$(this).remove();
