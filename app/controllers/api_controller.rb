@@ -386,16 +386,11 @@ p {
 }
 	</style>
 	<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>
+	<script type='application/javascript' src=\"https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js\"></script>
 	<script>
-	function refreshtimeline() {
-		$.ajax({
-			method: 'GET',
-			url: 'http://medicloud.io/timelineapi?auth=c67f85179fa1475ebd505cc3b88ecc98',
-			success: function(data) {
-				$('body').html(data);
-			},
-		});
-	}
+	$(function() {
+    	FastClick.attach(document.body);
+	});
 	$('.medtakeblock').on('click', 'div', function(){
 			var str = $(this).find('.takeinfo').text();
 			var thing = $(this);
