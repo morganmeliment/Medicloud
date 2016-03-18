@@ -396,8 +396,7 @@ p {
 			},
 		});
 	}
-
-	$('.medtakeblock div').on('click', function() {
+	$('.medtakeblock').on('click', 'div', function(){
 			var str = $(this).find('.takeinfo').text();
 			var thing = $(this);
 			$.ajax({
