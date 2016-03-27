@@ -735,10 +735,11 @@ end
 
 def generatemedsswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
-	medications = []
+	medications = {"names" => [], "doses" => []}
 	Medication.all.each do |medication|
 		if decrypt(medication.userid) == userident
-			medications.push decrypt(medication.name)
+			medications["names"].push decrypt(medication.name)
+			medications["doses"].push decrypt(medication.dose)
     	end
 	end
 	render :json => medications
