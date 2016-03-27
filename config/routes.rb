@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/noteupdate', to: 'notes#update'
   get 'homepage/signout'
   get '/controlpanel', to: 'admin#index'
+  get '/freedata', to: 'api#returnarray'
 
   get 'admin/createfirstuser'
   post 'admin/createorganization', to: 'admin#createorganization'

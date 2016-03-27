@@ -733,6 +733,10 @@ end
 def remoteregistration
 end
 
+def returnarray
+	render :json => ["Concerta", "Amed", "Hello"]
+end
+
 #class end
 end
 
