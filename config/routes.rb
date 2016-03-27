@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'homepage/signout'
   get '/controlpanel', to: 'admin#index'
   get '/usermeddata', to: 'api#generatemedsswift'
+  get '/getmedinfoswift', to: 'api#getmedinfoswift'
 
   get 'admin/createfirstuser'
   post 'admin/createorganization', to: 'admin#createorganization'
