@@ -733,8 +733,15 @@ end
 def remoteregistration
 end
 
-def returnarray
-	render :json => ["Concerta", "Amed", "Hello"]
+def generatemedsswift
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	medications = []
+	Medication.all.each do |medication|
+		if decrypt(medication.userid) == userident
+			medications.push decrypt(medication.name)
+    	end
+	end
+	render :json => medications
 end
 
 #class end
