@@ -749,7 +749,7 @@ end
 def getmedinfoswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))
-	render :json => med
+	render :html => med
 end
 
 #class end
