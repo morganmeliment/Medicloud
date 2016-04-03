@@ -749,10 +749,10 @@ end
 def getmedinfoswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))
-	str = "
+	strty = "
 	<div id = \"container\">
 	<p id = \"doseview\"><span id = \"bd\">" + decrypt(med.dose).to_s + "</span>mg</p><br>
-	<p id = \"schedview\"><span id = \"bd\">" + decrypt(med.schedule).to_s.split(" times/")[0] + "</span> times per week.</p>
+	<p id = \"schedview\"><span id = \"bd\">" + decrypt(med.schedule).to_s.split(" times/")[0] + "</span> times per " + decrypt(med.schedule).to_s.split(" times/")[1] + ".</p>
 	<p id = \"adilabel\">7 Day Adherence:</p>
 	<div id = \"gradient\">
 		<div id = \"sbox\">
@@ -850,7 +850,7 @@ def getmedinfoswift
 	}
 </style>
 	"
-	render :html => str
+	render :html => strty
 end
 
 
