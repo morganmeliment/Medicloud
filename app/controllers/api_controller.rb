@@ -830,6 +830,36 @@ def getmedinfoswift
 			sfhu = sfhu+"<img src = \"/assets/g4366.png\" class = \"sel-block hidden\">"
 		end
 	end
+	sfhut = ""
+	ng = 0
+	7.times do
+		ng += 1
+		if ng == 1
+			prevg = @adherencegraph[ng]
+			nextg = @adherencegraph[ng + 1]
+			thisg = @adherencegraph[ng]
+		elsif ng == 7
+			prevg = @adherencegraph[ng - 1]
+			nextg = @adherencegraph[ng]
+			thisg = @adherencegraph[ng]
+		else
+			prevg = @adherencegraph[ng - 1]
+			nextg = @adherencegraph[ng + 1]
+			thisg = @adherencegraph[ng]
+		end
+			
+		if thisg == 0.0
+			sfhut = sfhut+"<img src = \"/assets/path4364.png\" class = \"sub-percent-block\">"
+		elsif prevg == 0.0 && thisg != 0.0 && nextg != 0.0
+			sfhut = sfhut+"<img src = \"/assets/path4356.png\" class = \"sub-percent-block\">"
+		elsif prevg != 0.0 && thisg != 0.0 && nextg == 0.0
+			sfhut = sfhut+"<img src = \"/assets/path4358.png\" class = \"sub-percent-block\">"
+		elsif prevg == 0.0 && thisg != 0.0 && nextg == 0.0
+			sfhut = sfhut+"<img src = \"/assets/path4344.png\" class = \"sub-percent-block\">"
+		elsif prevg != 0.0 && thisg != 0.0 && nextg != 0.0
+			sfhut = sfhut+"<img src = \"/assets/rect4364.png\" class = \"sub-percent-block\">"
+		end
+	end
 	strty = "
 	<div id = \"container\">
 	<p id = \"doseview\"><span id = \"bd\">" + dunt + "</span>" + valt + "</p><br>
@@ -840,13 +870,7 @@ def getmedinfoswift
 			"+sfhu+"
 		</div>
 		<div id = \"box\">
-			<img src = \"/assets/path4344.png\" class = \"sub-percent-block\">
-			<img src = \"/assets/path4364.png\" class = \"sub-percent-block\">
-			<img src = \"/assets/path4356.png\" class = \"sub-percent-block\">
-			<img src = \"/assets/rect4364.png\" class = \"sub-percent-block\">
-			<img src = \"/assets/path4358.png\" class = \"sub-percent-block\">
-			<img src = \"/assets/path4364.png\" class = \"sub-percent-block\">
-			<img src = \"/assets/path4344.png\" class = \"sub-percent-block\">
+			"+sfhut+"
 		</div>
 	</div>
 </div>
