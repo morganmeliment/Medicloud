@@ -759,68 +759,77 @@ def getmedinfoswift
 	end
 
 	dun = decrypt(med.dose)
-			["mg", "g", "ml", "L"].each do |rep| 
-				dun.gsub!(rep, "")
-			end
-			dmes = decrypt(med.dose).gsub(dun, "")
-			nottime = decrypt(med.notification_time).split(" ")
-			dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize, :prectimenum => nottime[0], :prectimeun => nottime[1]}                      
+	["mg", "g", "ml", "L"].each do |rep| 
+			dun.gsub!(rep, "")
+	end
+	dmes = decrypt(med.dose).gsub(dun, "")
+	nottime = decrypt(med.notification_time).split(" ")
+	dem = {:name => decrypt(med.name), :schedule => decrypt(med.schedule), :dose => decrypt(med.dose), :id => encrypt(med.id), :un => dmes, :mes => dun.to_i, :ttimes => decrypt(med.schedule).split(" ")[0], :trate => decrypt(med.schedule).split(" times/")[1].capitalize, :prectimenum => nottime[0], :prectimeun => nottime[1]}                      
 
-			@medsforday = generate(decrypt(med.userid), 31)
+	@medsforday = generate(decrypt(med.userid), 31)
 			
-			@takendays = {}
-			qd = 0
-			31.times do
-				@takendays[qd] = []
-				qd += 1
+	@takendays = {}
+	qd = 0
+	31.times do
+		@takendays[qd] = []
+		qd += 1
+	end
+	med.datapoints.each do |datapoint|
+		daysago = (Date.today - datapoint[0].to_date).to_i
+		if daysago < 31
+			if datapoint[1] == "true"
+				@takendays[daysago].push med.id
 			end
-			med.datapoints.each do |datapoint|
-				daysago = (Date.today - datapoint[0].to_date).to_i
-				if daysago < 31
-					if datapoint[1] == "true"
-						@takendays[daysago].push med.id
-					end
-				end
-			end
+		end
+	end
  
-			@adherencegraph = {}
-			qb = 1
-			31.times do
-				@adherencegraph[qb] = 0.0
-				qb += 1
-			end
+	@adherencegraph = {}
+	qb = 1
+	31.times do
+		@adherencegraph[qb] = 0.0
+			qb += 1
+		end
 
-			@medsforday.each do |day, idarr|
-				idarr.each do |id|
-					if id == med.id
-						@adherencegraph[day + 1] += 1
-					end
-				end
+	@medsforday.each do |day, idarr|
+		idarr.each do |id|
+			if id == med.id
+				@adherencegraph[day + 1] += 1
 			end
+		end
+	end
 
-			medspecifarry = {}
-			qt = 1
-			31.times do
-				medspecifarry[qt] = 0
-				qt += 1
+	medspecifarry = {}
+	qt = 1
+	31.times do
+		medspecifarry[qt] = 0
+		qt += 1
+	end
+	@takendays.each do |day, idarr|
+		idarr.each do |id|
+			if id == med.id
+				medspecifarry[day + 1] += 1
 			end
-			@takendays.each do |day, idarr|
-				idarr.each do |id|
-					if id == med.id
-						medspecifarry[day + 1] += 1
-					end
-				end
-			end
-			@adherencegraph.each do |day, count|
-				if medspecifarry[day] != 0 && count != 0
-					@adherencegraph[day] = medspecifarry[day].to_f / count * 100
-				elsif medspecifarry[day] == 0 && count != 0
-					@adherencegraph[day] = 0.0
-				end
-			end
+		end
+	end
+	@adherencegraph.each do |day, count|
+		if medspecifarry[day] != 0 && count != 0
+			@adherencegraph[day] = medspecifarry[day].to_f / count * 100
+		elsif medspecifarry[day] == 0 && count != 0
+			@adherencegraph[day] = 0.0
+		end
+	end
 			
 	
-
+	sfhu = ""
+	g = 0
+	7.times do
+		g += 1
+		if @adherencegraph[g] == 0.0
+			sfhu = sfhu+"<img src = \"/assets/g4366.png\" class = \"sel-block\">"
+		else
+			sfhu = sfhu+"<img src = \"/assets/g4366.png\" class = \"sel-block hidden\">"
+		end
+	end
 	strty = "
 	<div id = \"container\">
 	<p id = \"doseview\"><span id = \"bd\">" + dunt + "</span>" + valt + "</p><br>
@@ -828,15 +837,7 @@ def getmedinfoswift
 	<p id = \"adilabel\">7 Day Adherence:</p>
 	<div id = \"gradient\">
 		<div id = \"sbox\">
-			"
-			7.times do |yut|
-				if @adherencegraph[yut] == 0
-					+"<img src = \"/assets/g4366.png\" class = \"sel-block\">"+
-				else
-					+"<img src = \"/assets/g4366.png\" class = \"sel-block hidden\">"+
-				end
-			end
-			"
+			"+sfhu+"
 		</div>
 		<div id = \"box\">
 			<img src = \"/assets/path4344.png\" class = \"sub-percent-block\">
