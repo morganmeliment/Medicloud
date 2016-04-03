@@ -749,9 +749,17 @@ end
 def getmedinfoswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))
+	dun = decrypt(med.dose)
+	val = ""
+	["mg", "g", "ml", "L"].each do |rep| 
+		dun.gsub!(rep, "")
+		if decrypt(med.dose) != dun and val == ""
+			val = rep
+		end
+	end
 	strty = "
 	<div id = \"container\">
-	<p id = \"doseview\"><span id = \"bd\">" + decrypt(med.dose).to_s + "</span>mg</p><br>
+	<p id = \"doseview\"><span id = \"bd\">" + dun + "</span>" + val + "</p><br>
 	<p id = \"schedview\"><span id = \"bd\">" + decrypt(med.schedule).to_s.split(" times/")[0] + "</span> times per " + decrypt(med.schedule).to_s.split(" times/")[1] + ".</p>
 	<p id = \"adilabel\">7 Day Adherence:</p>
 	<div id = \"gradient\">
