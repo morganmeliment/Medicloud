@@ -749,8 +749,110 @@ end
 def getmedinfoswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))
-	render :html => med
+	str = "
+	<div id = \"container\">
+	<p id = \"doseview\"><span id = \"bd\">" + decrypt(med.dose).to_s + "</span>mg</p><br>
+	<p id = \"schedview\"><span id = \"bd\">" + decrypt(med.schedule).to_s.split(" times/")[0] + "</span> times per week.</p>
+	<p id = \"adilabel\">7 Day Adherence:</p>
+	<div id = \"gradient\">
+		<div id = \"sbox\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block hidden\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block hidden\">
+			<img src = \"/assets/g4366.png\" class = \"sel-block\">
+		</div>
+		<div id = \"box\">
+			<img src = \"/assets/path4344.png\" class = \"sub-percent-block\">
+			<img src = \"/assets/path4364.png\" class = \"sub-percent-block\">
+			<img src = \"/assets/path4356.png\" class = \"sub-percent-block\">
+			<img src = \"/assets/rect4364.png\" class = \"sub-percent-block\">
+			<img src = \"/assets/path4358.png\" class = \"sub-percent-block\">
+			<img src = \"/assets/path4364.png\" class = \"sub-percent-block\">
+			<img src = \"/assets/path4344.png\" class = \"sub-percent-block\">
+		</div>
+	</div>
+</div>
+
+
+<style>
+	#container {
+		width: 100%;
+		height: 100%;
+		font-family: -apple-system;
+	}
+	#gradient {
+		height: calc(100% - 200px);
+		width: 100%;
+		position: absolute;
+		bottom: 0px;
+		background: linear-gradient(rgba(51,163,195,0), rgba(51,163,195,.2));
+	}
+	* {
+		margin: 0px;
+	}
+	#doseview {
+		font-weight: 100;
+		font-size: 35px;
+		margin: 25px 0 0 25px;
+		display: inline-block;
+	}
+	#schedview {
+		font-weight: 100;
+		font-size: 35px;
+		margin: 8px 0 0 25px;
+		display: inline-block;
+	}
+	#bd {
+		font-weight: 300;
+	}
+	.hidden {
+		opacity: 0;
+	}
+	.sub-percent-block {
+		flex: 1;
+		height: 200px;
+	}
+	.sel-block {
+		height: 30px;
+	}
+	#box {
+		width: 100%;
+		height: 200px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-end;
+		position: absolute;
+		bottom: 30px;
+	}
+	#sbox {
+		width: 100%;
+		height: 30px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: flex-end;
+		position: absolute;
+		bottom: 215px;
+	}
+	#adilabel {
+		font-size: 12px;
+		opacity: .4;
+		font-weight: 100;
+		color: black;
+		display: inline-block;
+		position: absolute;
+		left: 25px;
+		bottom: 270px;
+	}
+</style>
+	"
+	render :html => str
 end
+
 
 #class end
 end
