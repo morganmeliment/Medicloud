@@ -782,7 +782,7 @@ def getmedinfoswift
 					end
 				end
 			end
-
+ 
 			@adherencegraph = {}
 			qb = 1
 			31.times do
