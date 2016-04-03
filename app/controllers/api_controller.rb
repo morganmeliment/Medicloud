@@ -850,7 +850,7 @@ def getmedinfoswift
 	}
 </style>
 	"
-	render :html => strty
+	render :html => strty.html_safe
 end
 
 
