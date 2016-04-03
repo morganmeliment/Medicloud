@@ -824,7 +824,7 @@ def getmedinfoswift
 	g = 0
 	7.times do
 		g += 1
-		if @adherencegraph[g] == 0.0
+		if @adherencegraph[g] != 0.0
 			sfhu = sfhu+"<img src = \"/assets/g4366.png\" class = \"sel-block\">"
 		else
 			sfhu = sfhu+"<img src = \"/assets/g4366.png\" class = \"sel-block hidden\">"
