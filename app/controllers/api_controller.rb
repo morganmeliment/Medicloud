@@ -746,6 +746,31 @@ def generatemedsswift
 	render :json => medications
 end
 
+def getjsonmedinfo
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	med = Medication.find(decrypt(params[:eid]))
+	dunt = decrypt(med.dose)
+	valt = ""
+	["mg", "g", "ml", "L"].each do |rept| 
+		dunt.gsub!(rept, "")
+		if decrypt(med.dose) != dunt and valt == ""
+			valt = rept
+		end
+	end
+	shedy = decrypt(med.schedule)
+	schedon = true
+	if shedy == "0 times/day"
+		schedon = false
+	end
+	tare = shedy.split(" times/")
+	nottime = decrypt(med.notification_time)
+	twentyfour = nottime.split(" ")[0].to_i
+	if nottime.split(" ")[1] == "pm"
+		twentyfour += 12
+	end
+	render :json => [decrypt(med.name), dunt, valt, schedon, tare[0], tare[1].capitalize, "#{twentyfour}:00"]
+end
+
 def getmedinfoswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))

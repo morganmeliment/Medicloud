@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/usermeddata', to: 'api#generatemedsswift'
   get '/getmedinfoswift', to: 'api#getmedinfoswift'
 
+  get '/getjsonmedinfo', to: 'api#getjsonmedinfo'
+
   get 'admin/createfirstuser'
   post 'admin/createorganization', to: 'admin#createorganization'
 
