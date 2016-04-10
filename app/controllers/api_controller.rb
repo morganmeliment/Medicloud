@@ -758,9 +758,9 @@ def getjsonmedinfo
 		end
 	end
 	shedy = decrypt(med.schedule)
-	schedon = true
+	schedon = "true"
 	if shedy == "0 times/day"
-		schedon = false
+		schedon = "false"
 	end
 	tare = shedy.split(" times/")
 	nottime = decrypt(med.notification_time)
