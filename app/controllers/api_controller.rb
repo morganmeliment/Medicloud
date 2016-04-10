@@ -590,7 +590,7 @@ end
 
 def deletemedapi
 	if params[:med].present?
-		Medication.destroy(params[:med])
+		Medication.destroy(decrypt(params[:med]))
 		render :text => ""
 	end
 end
