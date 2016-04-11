@@ -746,6 +746,19 @@ def generatemedsswift
 	render :json => medications
 end
 
+def generatenotesswift
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	notes = {"names" => [], "content" => [], "ids" => []}
+	Note.all.each do |note|
+		if decrypt(note.userid) == userident
+			notes["names"].push decrypt(note.name)
+			notes["content"].push decrypt(note.notecontent).first(15)
+			notes["ids"].push encrypt(note.id)
+    	end
+	end
+	render :json => notes
+end
+
 def getjsonmedinfo
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))
