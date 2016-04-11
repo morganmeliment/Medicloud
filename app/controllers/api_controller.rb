@@ -752,7 +752,7 @@ def generatenotesswift
 	Note.all.each do |note|
 		if decrypt(note.userid) == userident
 			notes["names"].push decrypt(note.name)
-			notes["content"].push decrypt(note.notecontent).first(15)
+			notes["content"].push decrypt(note.notecontent)
 			notes["ids"].push encrypt(note.id)
     	end
 	end
