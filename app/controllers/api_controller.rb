@@ -802,6 +802,15 @@ def updatemedswift
 	render :text => "success"
 end
 
+def updatenoteswift
+	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
+	if !userident.nil?
+		@note = Note.update(decrypt(params[:eid]), :name => encrypt(params[:notename]), :notecontent => encrypt(params[:notecontent]))
+		@note.save
+	end
+	render :text => "success"
+end
+
 def getmedinfoswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	med = Medication.find(decrypt(params[:eid]))
