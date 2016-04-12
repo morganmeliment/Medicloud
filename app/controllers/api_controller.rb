@@ -339,6 +339,7 @@ p {
     margin-left: 23px;
     margin-top: 5px;
     font-weight: 100;
+    opacity: .7;
 }
 .medtakeblock div {
     width: 50px;
