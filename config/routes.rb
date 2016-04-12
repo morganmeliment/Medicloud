@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   get '/getmedinfoweb', to: 'api#getmedinfoweb'
   get '/getnoteinfoweb', to: 'api#getnoteinfoweb'
   post '/user/new', to: 'control#newuser'
-  post '/remotesignin', to: 'api#remotesignin'
+  get '/remotesignin', to: 'api#remotesignin'
   post 'api/remoteregistration'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
