@@ -749,7 +749,7 @@ def remoteregistration
     if found == false
       render :json => ["2"]
     else
-      render :json => [access.auth_token.to_s]
+      render :json => [access]
     end
 end
 	
