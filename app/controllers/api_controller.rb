@@ -730,10 +730,29 @@ def remotesignin
   		render :json => ["2"]
   	end
 end
-	
-def remoteregistration
-end
 
+def remoteregistration
+    found = false
+    user = []
+    access = ""
+    User.all.each do |us|
+      user.push us unless decrypt(us.fullname) != params[:username]
+    end
+    user.each do |u|
+      if u.accesscode == params[:access]
+        session[:current_user] = u.id
+        found = true
+        access = u.auth_token
+        User.update(u.id, :password => params[:password], :accesscode => nil, :active => "true")       
+      end
+    end
+    if found == false
+      render :json => ["2"]
+    else
+      render :json => [access.auth_token.to_s]
+    end
+end
+	
 def generatemedsswift
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	medications = {"names" => [], "doses" => [], "ids" => []}
@@ -1021,10 +1040,6 @@ end
 
 #class end
 end
-
-
-
-
 
 
 

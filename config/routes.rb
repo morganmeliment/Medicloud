@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with "root"remoteregistration
   root 'homepage#index'
 
   get 'control/index'
@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get '/getnoteinfoweb', to: 'api#getnoteinfoweb'
   post '/user/new', to: 'control#newuser'
   get '/remotesignin', to: 'api#remotesignin'
+  get '/remoteregistration', to: 'api#remoteregistration'
   post 'api/remoteregistration'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
