@@ -691,7 +691,7 @@ def getnoteinfoweb
 end
 
 def registerdevice
-	@user = User.find(params[:id])
+	@user = User.where(:auth_token => params[:auth]).first()
 	if @user.deviceids.include? params[:devid]
 		render :text => @user.deviceids
 	else
