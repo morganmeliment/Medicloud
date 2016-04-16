@@ -706,6 +706,7 @@ def takeallmeds
 	if @user
 		medNames = []
 		takenTimes = []
+		medIds = []
 		meds = generate(@user.id, 1)[0]
 		for med in meds
 			thismed = Medication.find(med)
@@ -719,18 +720,20 @@ def takeallmeds
 			if params[:period] == "day"
 				medNames.push decrypt(thismed.name)
 				takenTimes.push hasTaken
+				medIds.push thismed.id
 			else
 				t = params[:period].split('f')
 				time = decrypt(thismed.notification_time).split(' ')
 				if t[0] == time[0] and t[1] == time[1]
 					medNames.push decrypt(thismed.name)
 					takenTimes.push hasTaken
+					medIds.push thismed.id
 				end
 			end
 		end
-		render :json => {"names" => medNames, "taken" => takenTimes}
+		render :json => {"names" => medNames, "taken" => takenTimes, "ids" => medIds}
 	else
-		render :json => {"names" => [], "taken" => []}
+		render :json => {"names" => [], "taken" => [], "ids" => medIds}
 	end
 end
 
