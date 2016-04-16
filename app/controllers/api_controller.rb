@@ -720,9 +720,9 @@ def takeallmeds
 				medNames.push decrypt(thismed.name)
 				takenTimes.push hasTaken
 			else
-				t = Time.now.localtime
+				t = params[:period].split('f')
 				time = decrypt(thismed.notification_time).split(' ')
-				if t.strftime("%I") == time[0] and t.strftime("%p") == time[1].upcase
+				if t[0] == time[0] and t[1] == time[1]
 					medNames.push decrypt(thismed.name)
 					takenTimes.push hasTaken
 				end
