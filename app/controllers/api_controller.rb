@@ -705,7 +705,9 @@ def takeallmeds
 	@user = User.where(:auth_token => params[:auth]).first()
 	if @user
 		medNames = []
-		render :json => [generateSchedule(@user.id, 1), generate(@user.id, 1)]
+		render :json => [generateSchedule(@user.id, 21), generate(@user.id, 21)]
+	else
+		render :json => "hi"
 	end
 end
 
