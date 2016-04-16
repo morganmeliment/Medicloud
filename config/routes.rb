@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"remoteregistration
   root 'homepage#index'
 
+  get '/takeallmeds', to: 'api#takeallmeds'
+
   get 'control/index'
 
   post '/createuser', to: 'control#createuser'

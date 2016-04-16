@@ -701,6 +701,14 @@ def registerdevice
 	end
 end
 
+def takeallmeds
+	@user = User.where(:auth_token => params[:auth]).first()
+	if @user
+		medNames = []
+		render :json => [generateSchedule(@user.id, 1), generate(@user.id, 1)]
+	end
+end
+
 def sendnotification
 	@u = User.find(1).deviceids
 	for e in @u
