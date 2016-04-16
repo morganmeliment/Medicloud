@@ -705,10 +705,31 @@ def takeallmeds
 	@user = User.where(:auth_token => params[:auth]).first()
 	if @user
 		medNames = []
+		takenTimes = []
 		meds = generate(@user.id, 1)[0]
-		render json: meds
+		for med in meds
+			thismed = Medication.find(med)
+			hasTaken = false
+			for g in thismed.datapoints
+				if g[0].to_date == thisDate && g[1] == "true"
+					hasTaken = true
+				end
+			end
+			if params[:period] == "day"
+				medNames.push decrypt(thismed.name)
+				takenTimes.push hasTaken
+			else
+				t = Time.now.localtime
+				time = decrypt(thismed.notification_time).split(' ')
+				if t.strftime("%I") == time[0] and t.strftime("%p") == time[1].upcase
+					medNames.push decrypt(thismed.name)
+					takenTimes.push hasTaken
+				end
+			end
+		end
+		render :json => {"names" => medNames, "taken" => takenTimes}
 	else
-		render :json => "hi"
+		render :json => {"names" => [], "taken" => []}
 	end
 end
 
