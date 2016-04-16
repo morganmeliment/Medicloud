@@ -707,7 +707,7 @@ def takeallmeds
 		medNames = []
 		takenTimes = []
 		medIds = []
-		meds = generate(@user.id, 1)[0]
+		meds = generate(@user.id, 1)[0].sort! { |x, y| x.to_i <=> y.to_i }
 		for med in meds
 			thismed = Medication.find(med)
 			hasTaken = false
