@@ -720,14 +720,14 @@ def takeallmeds
 			if params[:period] == "day"
 				medNames.push decrypt(thismed.name)
 				takenTimes.push hasTaken
-				medIds.push thismed.id
+				medIds.push thismed.id.to_s
 			else
 				t = params[:period].split('f')
 				time = decrypt(thismed.notification_time).split(' ')
 				if t[0] == time[0] and t[1] == time[1]
 					medNames.push decrypt(thismed.name)
 					takenTimes.push hasTaken
-					medIds.push thismed.id
+					medIds.push thismed.id.to_s
 				end
 			end
 		end
