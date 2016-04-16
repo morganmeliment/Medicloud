@@ -705,7 +705,7 @@ def takeallmeds
 	@user = User.where(:auth_token => params[:auth]).first()
 	if @user
 		medNames = []
-		meds = generate(@user.id, 1)["0"]
+		meds = generate(@user.id, 1)[0]
 		render json: meds
 	else
 		render :json => "hi"
