@@ -710,6 +710,7 @@ def takeallmeds
 		for med in meds
 			thismed = Medication.find(med)
 			hasTaken = false
+			thisDate = Date.today
 			for g in thismed.datapoints
 				if g[0].to_date == thisDate && g[1] == "true"
 					hasTaken = true
