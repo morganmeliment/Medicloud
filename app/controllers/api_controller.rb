@@ -1073,7 +1073,13 @@ def getmedinfoswift
 	render :html => strty.html_safe
 end
 
-
+def genmeddb
+	arry = ""
+	MedDB.all.each do |med|
+		arry = arry + "\"#{med.name}\","
+	end
+	render text: arry
+end
 #class end
 end
 

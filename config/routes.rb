@@ -47,6 +47,8 @@ Rails.application.routes.draw do
 
   get '/takeallmeds', to: 'api#takeallmeds'
 
+  get '/gmeddb', to: 'api#genmeddb'
+
   get 'control/index'
 
   post '/createuser', to: 'control#createuser'
