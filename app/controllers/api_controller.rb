@@ -1075,7 +1075,7 @@ end
 
 def genmeddb
 	arry = ""
-	MedDB.all.each do |med|
+	MedDb.all.each do |med|
 		arry = arry + "\"#{med.name}\","
 	end
 	render text: arry
