@@ -1,3 +1,4 @@
+<div class = "navscreen">
 <div id = "topnavonhome">
 	<div>
 		<img src = "/assets/logo-small.png" alt = "medicloud logo">
@@ -10,7 +11,7 @@
 		<a id = "signen">Sign In</a>
 		<a id = "signop2" href = "/users/register">
 			<div>
-				<p>Register</p>
+				<p>REGISTER</p>
 			</div>
 		</a>
 	<% else %>
@@ -20,50 +21,215 @@
 		<a id = "signen" style = "margin-right: -6px;">Sign Out</a>
 		<a id = "signop2" href = "/control/index">
 			<div>
-				<p>Go To Portal</p>
+				<p>PORTAL</p>
 			</div>
 		</a>
 	<% end %>
-	
+</div>
+</div>
+<div class = "smallscreen">
+<div id = "topnavonhome2">
+	<div>
+		<img src = "/assets/logo-small.png" alt = "medicloud logo">
+		<p>Medicloud</p>
+	</div>
+	<img src = "/assets/rect10368.png" id = "hamburgericon">
+	<div id = "dropdownmobile">
+		<% if !current_user %>
+			<a href = "/users/sign_in">
+				<div id = "ddf1"><span>Sign In</span></div>
+			</a>
+			<a href = "/users/register">
+				<div id = "ddf2"><span>Register</span></div>
+			</a>
+		<% else %>
+			<a href = "/homepage/signout">
+				<div id = "ddf1"><span>Sign Out</span></div>
+			</a>
+			<a href = "/control/index">
+				<div id = "ddf2"><span>Go To Portal</span></div>
+			</a>
+		<% end %>
+	</div>
+</div>
 </div>
 
+<div id = "largescreen">
 <div id = "promoblock1">
-	<p id = "homepageheader">Make Medications Safer</p>
+	<p id = "homepageheader">IMPROVE YOUR POPULATION HEALTH</p>
 	<a href = "mailto:team@medicloud.io">
-		<img src = "/assets/get-started.png" alt = "medicloud portal button">
+		<img src = "/assets/g7901.png" alt = "medicloud portal button">
 	</a>
-	<img src = "/assets/med-promo.png" id = "blockoneimagepro" alt = "medicloud medications img">
+	<div id = "imageblock">
+		<div id = "blockoneimagepro"></div>
+	</div>
 </div>
 
 <div id = "promoblock2">
-	<h1>Powerful Medication Management</h1>
-	<h2>Medicloud is designed to be a robust solution for managing your medications and conditions.</h2>
+	<p id = "about">ABOUT US</p>
+	<p id = "aboutbody">Medicloud helps healthcare providers improve patient health and adherence, dramatically reduce costs, and gain valuable insight on their populations through a mobile-based data collection platform.</p>
+	<p id = "about">HOW IT WORKS</p>
+	<p id = "aboutbody">We collect data from patients who use our mobile app and process it into an organized dashboard for healthcare providers. This dashboard gives providers superior insight into their patients, which can influence more accurate prescriptions and in turn, healthier patients.</p>
+	<br><br>
 	<img src = "/assets/inter-promo.png" id = "firstptwo" alt = "medicloud interactions">
 	<h3 id = "interactionspromo">Interactions</h3>
-	<p id = "interactionssubtext">Prevent interactions between your medications by using the safety button.</p>
+	<p id = "interactionssubtext">Our algorithm can detect if patients have mismatched medications.</p>
 	<img src = "/assets/connector.png" id = "connectorone" alt = "">
 	<img src = "/assets/cal-promo.png" id = "secptwo" alt = "medicloud calendar">
-	<h3 id = "calendarspromo">Calendar</h3>
-	<p id = "calendarssubtext">An auto-generated calendar will tell you when to take your medications.</p>
+	<h3 id = "calendarspromo">Adherence</h3>
+	<p id = "calendarssubtext">Our mobile app is designed around maximizing adherence.</p>
 	<img src = "/assets/connector.png" id = "connectortwo" alt = "">
 	<img src = "/assets/graph-promo.png" id = "thirdptwo" alt = "medicloud graphs">
-	<h3 id = "graphspromo">Graphs</h3>
-	<p id = "graphssubtext">Medicloud makes graphs based on data about your medications.</p>
-</div>
-
-<div id = "promoblock3">
-	<h1>Medicloud Is On All Of Your Devices</h1>
-	<h2>So you always have access wherever you are.</h2>
-	<img src = "/assets/devices-promo.png" id = "devicespromo" alt = "medicloud devices">
-</div><br>
-
-<div id = "promoblock5">
-	<a href = "mailto:team@medicloud.io">
-		<img src = "/assets/email-img.png" alt = "medicloud mail address">
+	<h3 id = "graphspromo">Dashboard</h3>
+	<p id = "graphssubtext">Our dashboard generates many important adherence graphs.</p>
+	<p id = "about" style = "margin-top: 380px;">TEAM</p>
+	<p id = "aboutbody">We'd love to hear from you. Email us at team@medicloud.io to learn more or set up a free trial.</p>
+	<iframe width="850" height="350" frameborder="0" style="border:0; margin: 40px 0 0 105px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ5cyscCK3tEwRT_DsE-vcGn8&key=AIzaSyAIMN8GLKBYbDY6Y78u4MkITvKgW7MmmpM" allowfullscreen></iframe>
+	<a href = "mailto:team@medicloud.io" id = "mailimg">
+		<img src = "/assets/path8033.png" alt = "medicloud mail address">
 	</a>
 </div>
+</div>
+
+<div id = "mediumscreen">
+<div id = "promoblock12">
+	<p id = "homepageheader2">IMPROVE YOUR POPULATION HEALTH</p>
+	<a href = "mailto:team@medicloud.io">
+		<img src = "/assets/g7901.png" alt = "medicloud portal button">
+	</a>
+	<div id = "imageblock2">
+		<div id = "blocktwoimagepro"></div>
+	</div>
+</div>
+
+<div id = "promoblock22">
+	<p id = "about">ABOUT US</p>
+	<p id = "aboutbody">Medicloud helps healthcare providers improve patient health and adherence, dramatically reduce costs, and gain valuable insight on their populations through a mobile-based data collection platform.</p>
+	<p id = "about">HOW IT WORKS</p>
+	<p id = "aboutbody">We collect data from patients who use our mobile app and process it into an organized dashboard for healthcare providers. This dashboard gives providers superior insight into their patients, which can influence more accurate prescriptions and in turn, healthier patients.</p>
+	<br><br>
+	<img src = "/assets/inter-promo.png" id = "firstptwo" alt = "medicloud interactions">
+	<h3 id = "interactionspromo">Interactions</h3>
+	<p id = "interactionssubtext">Our algorithm can detect if patients have mismatched medications.</p>
+	<img src = "/assets/connector.png" id = "connectorone" alt = "">
+	<img src = "/assets/cal-promo.png" id = "secptwo" alt = "medicloud calendar">
+	<h3 id = "calendarspromo">Adherence</h3>
+	<p id = "calendarssubtext">Our mobile app is designed around maximizing adherence.</p>
+	<img src = "/assets/connector.png" id = "connectortwo" alt = "">
+	<img src = "/assets/graph-promo.png" id = "thirdptwo" alt = "medicloud graphs">
+	<h3 id = "graphspromo">Dashboard</h3>
+	<p id = "graphssubtext">Our dashboard generates many important adherence graphs.</p>
+	<p id = "about" style = "margin-top: 380px;">TEAM</p>
+	<p id = "aboutbody">We'd love to hear from you. Email us at team@medicloud.io to learn more or set up a free trial.</p>
+	<iframe width="650" height="350" frameborder="0" style="border:0; margin: 40px 0 0 75px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ5cyscCK3tEwRT_DsE-vcGn8&key=AIzaSyAIMN8GLKBYbDY6Y78u4MkITvKgW7MmmpM" allowfullscreen></iframe>
+	<a href = "mailto:team@medicloud.io" id = "mailimg">
+		<img src = "/assets/path8033.png" alt = "medicloud mail address">
+	</a>
+</div>
+</div>
+
+<div class = "smallscreen">
+<div id = "promoblock13">
+	<p id = "homepageheader3">IMPROVE YOUR POPULATION HEALTH</p>
+	<a href = "mailto:team@medicloud.io">
+		<img src = "/assets/g7901.png" alt = "medicloud portal button">
+	</a>
+	<div id = "imageblock3">
+		<div id = "blockthreeimagepro"></div>
+	</div>
+</div>
+
+<div id = "promoblock23">
+	<p id = "about">ABOUT US</p>
+	<p id = "aboutbody">Medicloud helps healthcare providers improve patient health and adherence, dramatically reduce costs, and gain valuable insight on their populations through a mobile-based data collection platform.</p>
+	<p id = "about">HOW IT WORKS</p>
+	<p id = "aboutbody">We collect data from patients who use our mobile app and process it into an organized dashboard for healthcare providers. This dashboard gives providers superior insight into their patients, which can influence more accurate prescriptions and in turn, healthier patients.</p>
+	<br><br>
+	<img src = "/assets/inter-promo.png" id = "firstptwo2" alt = "medicloud interactions">
+	<h3 id = "interactionspromo2">Interactions</h3>
+	<p id = "interactionssubtext2">Our algorithm can detect if patients have mismatched medications.</p>
+	<img src = "/assets/cal-promo.png" id = "secptwo2" alt = "medicloud calendar">
+	<h3 id = "calendarspromo2">Adherence</h3>
+	<p id = "calendarssubtext2">Our mobile app is designed around maximizing adherence.</p>
+	<img src = "/assets/graph-promo.png" id = "thirdptwo2" alt = "medicloud graphs">
+	<h3 id = "graphspromo2">Dashboard</h3>
+	<p id = "graphssubtext2">Our dashboard generates many important adherence graphs.</p>
+	<p id = "about" style = "margin-top: 980px;">TEAM</p>
+	<p id = "aboutbody">We'd love to hear from you. Email us at team@medicloud.io to learn more or set up a free trial.</p>
+	<iframe width="500" height="350" frameborder="0" style="border:0; margin: 40px 0 0 100px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ5cyscCK3tEwRT_DsE-vcGn8&key=AIzaSyAIMN8GLKBYbDY6Y78u4MkITvKgW7MmmpM" allowfullscreen></iframe>
+	<a href = "mailto:team@medicloud.io" id = "mailimg">
+		<img src = "/assets/path8033.png" alt = "medicloud mail address">
+	</a>
+</div>
+</div>
+<!--
+<div class = "phonescreen">
+<div id = "promoblock13">
+	<p id = "homepageheader3">IMPROVE YOUR POPULATION HEALTH</p>
+	<a href = "mailto:team@medicloud.io">
+		<img src = "/assets/g7901.png" alt = "medicloud portal button">
+	</a>
+	<div id = "imageblock3">
+		<div id = "blockthreeimagepro"></div>
+	</div>
+</div>
+
+<div id = "promoblock23">
+	<p id = "about">ABOUT US</p>
+	<p id = "aboutbody">Medicloud helps healthcare providers improve patient health and adherence, dramatically reduce costs, and gain valuable insight on their populations through a mobile-based data collection platform.</p>
+	<p id = "about">HOW IT WORKS</p>
+	<p id = "aboutbody">We collect data from patients who use our mobile app and process it into an organized dashboard for healthcare providers. This dashboard gives providers superior insight into their patients, which can influence more accurate prescriptions and in turn, healthier patients.</p>
+	<br><br>
+	<img src = "/assets/inter-promo.png" id = "firstptwo2" alt = "medicloud interactions">
+	<h3 id = "interactionspromo2">Interactions</h3>
+	<p id = "interactionssubtext2">Our algorithm can detect if patients have mismatched medications.</p>
+	<img src = "/assets/cal-promo.png" id = "secptwo2" alt = "medicloud calendar">
+	<h3 id = "calendarspromo2">Adherence</h3>
+	<p id = "calendarssubtext2">Our mobile app is designed around maximizing adherence.</p>
+	<img src = "/assets/graph-promo.png" id = "thirdptwo2" alt = "medicloud graphs">
+	<h3 id = "graphspromo2">Dashboard</h3>
+	<p id = "graphssubtext2">Our dashboard generates many important adherence graphs.</p>
+	<p id = "about" style = "margin-top: 980px;">TEAM</p>
+	<p id = "aboutbody">We'd love to hear from you. Email us at team@medicloud.io to learn more or set up a free trial.</p>
+	<iframe width="500" height="350" frameborder="0" style="border:0; margin: 40px 0 0 100px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:EiUxNCBMZWR5YXJkIExuLCBIYW5vdmVyLCBOSCAwMzc1NSwgVVNB&key=AIzaSyAIMN8GLKBYbDY6Y78u4MkITvKgW7MmmpM" allowfullscreen></iframe>
+	<a href = "mailto:team@medicloud.io" id = "mailimg">
+		<img src = "/assets/path8033.png" alt = "medicloud mail address">
+	</a>
+</div>
+</div>-->
+
 
 <script>
+	$("#dropdownmobile").hide();
+	$("#hamburgericon").click(function() {
+		$("#dropdownmobile").toggle();
+	});
+	if ($(window).width() < 1050 && $(window).width() > 800) {
+   		$("#mediumscreen").show();
+   		$("#largescreen").hide();
+   		$(".smallscreen").hide();
+   		$(".navscreen").show();
+	}
+ 	else if ($(window).width() < 800) {
+   		$("#mediumscreen").hide();
+   		$("#largescreen").hide();
+   		$(".smallscreen").show();
+   		$(".navscreen").hide();
+ 	} else if ($(window).width() < 800) {
+   		$("#mediumscreen").hide();
+   		$("#largescreen").hide();
+   		$(".smallscreen").show();
+   		$(".navscreen").hide();
+ 	} else {
+ 		$(".smallscreen").hide();
+ 		$("#mediumscreen").hide();
+   		$("#largescreen").show();
+   		$(".navscreen").show();
+ 	}
 	$("#bgnavnumone").hover(function() {
 		$(this).animate({opacity: '.1'}, 200);
 	}, function() {
@@ -74,5 +240,27 @@
 		$(this).animate({opacity: '.1'}, 200);
 	}, function() {
 		$(this).animate({opacity: '0'}, 200);
+	});
+	$(window).resize(function() {
+  		if ($(window).width() < 1050 && $(window).width() > 800) {
+   		$("#mediumscreen").show();
+   		$("#largescreen").hide();
+   		$(".smallscreen").hide();
+   		$(".navscreen").show();
+   		$("#dropdownmobile").hide();
+	}
+ 	else if ($(window).width() < 800) {
+   		$("#mediumscreen").hide();
+   		$("#largescreen").hide();
+   		$(".smallscreen").show();
+   		$(".navscreen").hide();
+   		$("#dropdownmobile").hide();
+ 	} else {
+ 		$(".smallscreen").hide();
+ 		$("#mediumscreen").hide();
+   		$("#largescreen").show();
+   		$(".navscreen").show();
+   		$("#dropdownmobile").hide();
+ 	}
 	});
 </script>
