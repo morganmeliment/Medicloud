@@ -25,17 +25,16 @@ class MedicationsController < ApplicationController
   end
 
   def create
-    @result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:name].tr(' ', '_')}&allsrc=0&search=1").read)#['idGroup']['rxnormId']
-    #if @result
-    #	medication = Medication.new(:userid => params[:auth], :name => encrypt(params[:name]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:time]} #{params[:mer]}"), :interaction_id => encrypt(@result.first))
-    #	medication.save
-    #end
-    #redirect_to medications_index_path
-    render :json => @result
+    @result = JSON.parse(open("https://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:name].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
+    if @result
+    	medication = Medication.new(:userid => params[:auth], :name => encrypt(params[:name]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:time]} #{params[:mer]}"), :interaction_id => encrypt(@result.first))
+    	medication.save
+    end
+    redirect_to medications_index_path
   end
 
   def update
-  	@result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:name].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
+  	@result = JSON.parse(open("https://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:name].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
     if @result
     	medication = Medication.update(decrypt(params[:ident]), :name => encrypt(params[:name]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:time]} #{params[:mer]}"), :interaction_id => encrypt(@result.first))
     	medication.save
@@ -65,7 +64,7 @@ class MedicationsController < ApplicationController
     	end
     end
     @usermeds.each do |medication|
-    	@parsedopen = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=#{decrypt(medication.interaction_id)}").read)
+    	@parsedopen = JSON.parse(open("https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=#{decrypt(medication.interaction_id)}").read)
     	@trtying = @parsedopen['interactionTypeGroup']
     	if !@trtying.nil?
         	medicationinteractions = []

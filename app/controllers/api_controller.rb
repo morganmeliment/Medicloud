@@ -555,7 +555,7 @@ def createthedb
 end
 
 def createmedication
-	@result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:medname].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
+	@result = JSON.parse(open("https://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:medname].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	if @result
 		mer = "am"
@@ -841,7 +841,7 @@ def getjsonmedinfo
 end
 
 def updatemedswift
-	@result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:medname].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
+	@result = JSON.parse(open("https://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:medname].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
 	userident = User.where(:auth_token => params[:auth]).pluck(:id).first()
 	if !userident.nil? and @result
 		mer = "am"
