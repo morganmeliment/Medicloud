@@ -26,11 +26,12 @@ class MedicationsController < ApplicationController
 
   def create
     @result = JSON.parse(open("http://rxnav.nlm.nih.gov/REST/rxcui.json?name=#{params[:name].tr(' ', '_')}&allsrc=0&search=1").read)['idGroup']['rxnormId']
-    if @result
-    	medication = Medication.new(:userid => params[:auth], :name => encrypt(params[:name]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:time]} #{params[:mer]}"), :interaction_id => encrypt(@result.first))
-    	medication.save
-    end
-    redirect_to medications_index_path
+    #if @result
+    #	medication = Medication.new(:userid => params[:auth], :name => encrypt(params[:name]), :schedule => encrypt("#{params[:times]} times/#{params[:timeunit]}"), :dose => encrypt("#{params[:dosenum]}#{params[:doseun]}"), :notification_time => encrypt("#{params[:time]} #{params[:mer]}"), :interaction_id => encrypt(@result.first))
+    #	medication.save
+    #end
+    #redirect_to medications_index_path
+    render :text => @result
   end
 
   def update
